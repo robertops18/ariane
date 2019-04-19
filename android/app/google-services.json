@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "467388675213",
+    "firebase_url": "https://arianetfg.firebaseio.com",
+    "project_id": "arianetfg",
+    "storage_bucket": "arianetfg.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:467388675213:android:0cfc81ebd82a6d6b",
+        "android_client_info": {
+          "package_name": "com.uniovi.ariane"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "467388675213-mb4co8outlp5ahkbguph1bnv1rsbklpq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uniovi.ariane",
+            "certificate_hash": "f3c2981376ca32abc60c0e11d84348d34326bb36"
+          }
+        },
+        {
+          "client_id": "467388675213-bhol71gmopsm1ma0rd22mflo2l17d575.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADU_4KOggXc0S5Q-E7QTwy1MCXlCyXlSQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "467388675213-bhol71gmopsm1ma0rd22mflo2l17d575.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
