@@ -21,7 +21,7 @@ class Api {
 
     
     async uploadAvatar(token, data){
-        const query = await customfetch(`http://softcongress.gooapps.net/app_dev.php/api/user/update-avatar`, {
+        const query = await customfetch(`${BASE_API}/user/update-avatar`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -46,7 +46,7 @@ const ListStack = createStackNavigator({
       headerTitleStyle: {
         color: "#fff"
       },
-      headerTitle: "Listado"
+      headerTitle: "Map"
     }
   }
 });
@@ -61,7 +61,7 @@ const ProfileStack = createStackNavigator({
       headerTitleStyle: {
         color: "#fff"
       },
-      headerTitle: "Mi perfil"
+      headerTitle: "My profile"
     }
   },
   ChangePassword: {
@@ -89,21 +89,21 @@ const TabScreen = createBottomTabNavigator(
       screen: ListStack,
       path: "userList",
       navigationOptions: {
-        tabBarLabel: "Listado",
+        tabBarLabel: "Map",
         headerStyle: {
           backgroundColor: MAIN_COLOR
         },
         headerTitleStyle: {
           color: "#fff"
         },
-        tabBarIcon: ({ tintColor }) => <Ionicons name='ios-list' size={26} style={{ color: tintColor }} />
+        tabBarIcon: ({ tintColor }) => <Ionicons name='ios-map' size={26} style={{ color: tintColor }} />
       }
     },
 
     Settings: {
       screen: ProfileStack,
       navigationOptions: {
-        tabBarLabel: "Settings",
+        tabBarLabel: "Profile",
         headerStyle: {
           backgroundColor: MAIN_COLOR
         },

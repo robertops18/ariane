@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { StyleSheet, FlatList, ActivityIndicator } from "react-native";
 import { Card, ListItem, Button, Icon } from "react-native-elements";
+import Map from "../../components/map";
 
 class ListScreen extends Component {
   constructor(props) {
@@ -33,11 +34,13 @@ class ListScreen extends Component {
 
   render() {
     return (
+      /*
       <>
         <ActivityIndicator animating={this.state.loading} />
         <FlatList keyExtractor={this.keyExtractor} data={this.state.users} renderItem={this.renderItem} />
       
-      </>
+      </>*/
+      <Map/>
     );
   }
 }

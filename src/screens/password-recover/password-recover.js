@@ -47,7 +47,7 @@ class PasswordRecover extends React.Component {
                 <SafeAreaView style={styles.container}>
                     <View>
                         <Image
-                            source={require('../../../assets/gooapps.png')}
+                            source={require('../../../assets/uniovi.png')}
                             style={styles.logo}
                         />
                         <ActivityIndicator

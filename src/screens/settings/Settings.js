@@ -140,9 +140,6 @@ const styles = StyleSheet.create({
   textName: {
     fontWeight: "bold",
     fontSize: 20
-  }, textName: {
-    fontWeight: "bold",
-    fontSize: 20
   },
   textEmail: {
     color: MAIN_COLOR,
