@@ -3,6 +3,7 @@ import { ActivityIndicator, StatusBar, StyleSheet, View, Alert } from "react-nat
 import { connect } from "react-redux";
 import firebase from "react-native-firebase";
 import { MAIN_COLOR } from "react-native-dotenv";
+import API from "../providers/api";
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {

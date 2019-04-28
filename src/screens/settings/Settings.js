@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/Ionicons";
 import { ActivityIndicator } from "react-native";
@@ -8,7 +14,8 @@ import TextLink from "../../components/text-link";
 import API from "../../providers/api";
 import { MAIN_COLOR } from "react-native-dotenv";
 import { Avatar } from "react-native-elements";
-import DeviceInfo from "react-native-device-info";
+import translate from '../../utils/language.utils.js';
+
 
 function mapStateToProps(state) {
   return {
@@ -81,28 +88,22 @@ class SettingsScreen extends React.Component {
         <View>
           <View style={styles.infoContainer}>
             <Text style={styles.textName}>{this.props.profile.profile.username.toUpperCase()}</Text>
-            <Text style={styles.textSurname}>{`${this.props.profile.profile.first_name} ${this.props.profile.profile.last_name}`} </Text>
+            <Text style={styles.textSurname}>{`${this.props.profile.profile.name} ${this.props.profile.profile.surname}`} </Text>
 
             <Text style={styles.textEmail}>{this.props.profile.profile.email}</Text>
           </View>
          
           <TouchableOpacity style={styles.itemContainer} onPress={() => this.props.navigation.navigate("ChangePassword")}>
             <View style={styles.itemContent}>
-              <Text style={styles.title}>Cambiar contraseña</Text>
+              <Text style={styles.title}>{translate('CHANGE_PASSWD')}</Text>
             </View>
             <View style={styles.arrowIcon}>
               <Icon name='ios-arrow-forward' size={18} />
             </View>
           </TouchableOpacity>
         </View>
-        <View style={styles.infoContainer}>
-          <Text>{`${DeviceInfo.getApplicationName()
-            .charAt(0)
-            .toUpperCase() + DeviceInfo.getApplicationName().slice(1)}: ${DeviceInfo.getVersion()} `}</Text>
-          <Text>{`Compilación: ${DeviceInfo.getBuildNumber()} `}</Text>
-        </View>
         <View style={styles.bottom}>
-          <TextLink onPress={this.handleLogout} label='Cerrar sesión' />
+          <TextLink onPress={this.handleLogout} label={translate('LOGOUT')} />
         </View>
       </ScrollView>
     );

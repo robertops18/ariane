@@ -93,6 +93,22 @@ class Api {
 
     }
 
+    async getFieldTrips(token) {
+      const query = await customfetch(`${BASE_API}/field-activity/student/activities`,{
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+        }
+      }, token);
+
+      if(query){
+        const data = await query.json();
+        return data.result;
+      } else {
+        return false;
+      }
+    }
    
 }
 

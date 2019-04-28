@@ -63,6 +63,14 @@ class Login extends React.Component {
                         });
                     });
 
+                    API.getFieldTrips(user.token).then((fieldTripsList) => {
+                      this.props.dispatch({
+                        type: 'SET_TRIPS_LIST',
+                        payload: {
+                          fieldTripsList
+                        }
+                      });
+                    });
 
                     FCM.hasPermissions().then((data) => {
                         if(!data){

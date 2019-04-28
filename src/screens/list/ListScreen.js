@@ -1,8 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { StyleSheet, FlatList, ActivityIndicator } from "react-native";
-import { Card, ListItem, Button, Icon } from "react-native-elements";
-import Map from "../../components/map";
+import {StyleSheet, ScrollView, RefreshControl} from "react-native";
+import { ListItem } from "react-native-elements";
+import API from "../../providers/api";
+import List from "../../components/list";
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+    list: state.data.fieldTripsList
+  }
+}
 
 class ListScreen extends Component {
   constructor(props) {
@@ -10,37 +18,43 @@ class ListScreen extends Component {
   }
 
   state = {
-    users: [],
-    loading: true
+    refreshing: false
   };
 
-  componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then(response => response.json())
-      .then(json => {
-        this.setState({ users: json, loading: false });
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    API.getFieldTrips(this.props.user.token).then((fieldTripsList) => {
+
+      this.props.dispatch({
+        type: 'SET_TRIPS_LIST',
+        payload: {
+          fieldTripsList
+        }
       });
-  }
+      this.setState({refreshing: false});
 
-  renderItem = ({ item }) => (
-    <ListItem
-      title={item.name}
-      subtitle={item.subtitle}
-      leftAvatar={{ source: { uri: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg" } }}
-    />
-  );
-
-  keyExtractor = (item, index) => index.toString();
+    }).catch((err) => {
+      this.setState({refreshing: false});
+    });
+  };
 
   render() {
+    const {refreshing} = this.state;
     return (
-      /*
-      <>
-        <ActivityIndicator animating={this.state.loading} />
-        <FlatList keyExtractor={this.keyExtractor} data={this.state.users} renderItem={this.renderItem} />
-      
-      </>*/
-      <Map/>
+      <ScrollView
+        style={styles.container}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={this._onRefresh}
+          />
+        }
+      >
+        <List
+          data={this.props.list}
+          name={'FIELD_TRIPS'}
+        />
+      </ScrollView>
     );
   }
 }
@@ -48,8 +62,7 @@ class ListScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center"
+    backgroundColor: "#fff"
   },
   textName: {
     fontWeight: "bold",
@@ -61,4 +74,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(null)(ListScreen);
+export default connect(mapStateToProps)(ListScreen);

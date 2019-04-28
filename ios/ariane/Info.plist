@@ -25,7 +25,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -73,12 +73,9 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>Necesitamos el acceso a la cámara para poder acceder a las imágenes y cambiar tu foto de perfil</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>For saving a photo.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Necesitamos el acceso a la galería para poder acceder a las imágenes y poder cambiar la foto de tu perfil</string>
-
 </dict>
 </plist>

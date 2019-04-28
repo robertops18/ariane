@@ -9,6 +9,8 @@ import ChangePassword from "../screens/change-password/change-password";
 import ListScreen from "../screens/list/ListScreen";
 import { MAIN_COLOR } from "react-native-dotenv";
 import PasswordRecover from "../screens/password-recover/password-recover";
+import Details from "../screens/details/details";
+import BackIcon from "../components/back-icon";
 
 const commonOptions = {
   headerStyle: {
@@ -20,6 +22,14 @@ const commonOptions = {
 };
 
 const AuthStack = createStackNavigator({ SignIn: LoginScreen, PasswordRecover: PasswordRecover });
+
+const details = {
+  screen: Details,
+  navigationOptions: ({navigation}) => ({
+    headerTransparent: true,
+    headerLeft: <BackIcon color='#780047' onPress={() => navigation.goBack() } />,
+  })
+};
 
 const HomeStack = createStackNavigator({
   Home: {
@@ -46,9 +56,10 @@ const ListStack = createStackNavigator({
       headerTitleStyle: {
         color: "#fff"
       },
-      headerTitle: "Map"
+      headerTitle: "Field Trips"
     }
-  }
+  },
+  Details: details
 });
 
 const ProfileStack = createStackNavigator({
@@ -75,20 +86,6 @@ const TabScreen = createBottomTabNavigator(
     Home: {
       screen: HomeStack,
       navigationOptions: {
-        tabBarLabel: "Home",
-        headerStyle: {
-          backgroundColor: MAIN_COLOR
-        },
-        headerTitleStyle: {
-          color: "#fff"
-        },
-        tabBarIcon: ({ tintColor }) => <Ionicons name='ios-home' size={26} style={{ color: tintColor }} />
-      }
-    },
-    List: {
-      screen: ListStack,
-      path: "userList",
-      navigationOptions: {
         tabBarLabel: "Map",
         headerStyle: {
           backgroundColor: MAIN_COLOR
@@ -97,6 +94,20 @@ const TabScreen = createBottomTabNavigator(
           color: "#fff"
         },
         tabBarIcon: ({ tintColor }) => <Ionicons name='ios-map' size={26} style={{ color: tintColor }} />
+      }
+    },
+    List: {
+      screen: ListStack,
+      path: "userList",
+      navigationOptions: {
+        tabBarLabel: "Field trips",
+        headerStyle: {
+          backgroundColor: MAIN_COLOR
+        },
+        headerTitleStyle: {
+          color: "#fff"
+        },
+        tabBarIcon: ({ tintColor }) => <Ionicons name='ios-list' size={26} style={{ color: tintColor }} />
       }
     },
 
@@ -110,7 +121,7 @@ const TabScreen = createBottomTabNavigator(
         headerTitleStyle: {
           color: "#fff"
         },
-        tabBarIcon: ({ tintColor }) => <Ionicons name='ios-settings' size={26} style={{ color: tintColor }} />
+        tabBarIcon: ({ tintColor }) => <Ionicons name='ios-person' size={26} style={{ color: tintColor }} />
       }
     }
   },
