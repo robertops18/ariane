@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, ScrollView, Dimensions, BackHandler} from 'react-native';
 import MapView from 'react-native-maps';
-import {Image} from "react-native-elements";
+import Geocoder from 'react-native-geocoder';
 
 
 export default class Details extends React.Component {
@@ -12,8 +12,8 @@ export default class Details extends React.Component {
       region : {
         latitude: 43.5314071,
         longitude: -5.7384944,
-        latitudeDelta: 0.5,
-        longitudeDelta: 0.5
+        latitudeDelta: 0.1,
+        longitudeDelta: 0.1
       },
       isMapReady: false
     }
@@ -23,20 +23,27 @@ export default class Details extends React.Component {
     this.setState({ isMapReady: true });
   }
 
-    static navigationOptions = ({ navigation }) => {
-        return {
-
-            defaultNavigationOptions: {
-                gesturesEnabled: false,
-            },
-
-        };
-    };
-
     componentDidMount() {
         this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
             this.props.navigation.goBack(); // works best when the goBack is async
             return true;
+        });
+
+        let area = this.props.navigation.state.params.item.area;
+        console.log(area);
+
+        Geocoder.geocodeAddress(area).then((res) => {
+          console.log(res);
+          let region = {
+            latitude: res[0].position.lat,
+            longitude: res[0].position.lng,
+            latitudeDelta: 0.1,
+            longitudeDelta: 0.1
+          }
+          this.setState({region: region});
+        }).catch((err) => {
+          console.log('Impossible to get latlng')
+          console.log(err);
         });
     }
 
@@ -102,6 +109,5 @@ const styles = StyleSheet.create({
     map: {
         height: 375,
         width: Dimensions.get('window').width,
-        resizeMode: 'cover'
     }
 });

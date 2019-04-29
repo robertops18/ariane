@@ -24,6 +24,16 @@ class AuthLoadingScreen extends React.Component {
   // Fetch the token from storage then navigate to our appropriate place
   checkIfUserHasLoggedIn = async () => {
     const userToken = this.props.state.token;
+    if (userToken) {
+      API.getFieldTrips(userToken).then((fieldTripsList) => {
+        this.props.dispatch({
+          type: 'SET_TRIPS_LIST',
+          payload: {
+            fieldTripsList
+          }
+        });
+      });
+    }
     this.props.navigation.navigate(userToken ? "App" : "Auth");
   };
 
