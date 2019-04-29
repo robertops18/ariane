@@ -52,7 +52,7 @@ class ListScreen extends Component {
       >
         <List
           data={this.props.list}
-          name={'FIELD_TRIPS'}
+          name={'field trips'}
         />
       </ScrollView>
     );

@@ -17,30 +17,57 @@ class ListItem extends React.Component {
       this.props.navigation.navigate('Details', {item: this.props.item});
     };
 
+    renderInfo = () => {
+      if (this.props.name === 'field trips') {
+        return (
+          <View style={styles.right}>
+            <Text
+              style={styles.title}
+              numberOfLines={1}
+              ellipsizeMode={'tail'}
+            >
+              {this.props.item.field_title}
+            </Text>
+
+            <Text
+              style={styles.subtitle}
+              numberOfLines={1}
+              ellipsizeMode={'tail'}
+            >
+              {this.props.item.school.school_name}
+            </Text>
+          </View>
+        )
+      } else if (this.props.name === 'tasks') {
+        return (
+          <View style={styles.right}>
+            <Text
+              style={styles.title}
+              numberOfLines={1}
+              ellipsizeMode={'tail'}
+            >
+              {this.props.item.task_name}
+            </Text>
+
+            <Text
+              style={styles.subtitle}
+              numberOfLines={1}
+              ellipsizeMode={'tail'}
+            >
+              {this.props.item.type}
+            </Text>
+          </View>
+        )
+      }
+    }
+
     render(){
         return (
             <TouchableOpacity
                 style={styles.container}
                 onPress={this.onPress}
             >
-
-                <View style={styles.right}>
-                    <Text
-                        style={styles.title}
-                        numberOfLines={1}
-                        ellipsizeMode={'tail'}
-                    >
-                        {this.props.item.field_title}
-                    </Text>
-
-                    <Text
-                        style={styles.subtitle}
-                        numberOfLines={1}
-                        ellipsizeMode={'tail'}
-                    >
-                        {this.props.item.school.school_name}
-                    </Text>
-                </View>
+                {this.renderInfo()}
                 <View style={styles.arrowIcon}>
                     <Icon name='ios-arrow-forward' size={18} />
                 </View>

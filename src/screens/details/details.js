@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, ScrollView, Dimensions, BackHandler} from 'react-native';
 import MapView from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
+import List from "../../components/list";
 
 
 export default class Details extends React.Component {
@@ -15,7 +16,8 @@ export default class Details extends React.Component {
         latitudeDelta: 0.1,
         longitudeDelta: 0.1
       },
-      isMapReady: false
+      isMapReady: false,
+      item : this.props.navigation.state.params.item
     }
   }
 
@@ -68,11 +70,15 @@ export default class Details extends React.Component {
               </MapView>
               <View style={styles.infoContainer}>
                 <Text style={styles.title}>
-                    {this.props.navigation.state.params.item.field_title.toUpperCase()}
+                    {this.state.item.field_title.toUpperCase()}
                 </Text>
                 <Text style={styles.text}>
-                    {this.props.navigation.state.params.item.school.school_name}
+                    {this.state.item.school.school_name}
                 </Text>
+                <List
+                  data={this.state.item.tasks}
+                  name={'tasks'}>
+                </List>
               </View>
             </ScrollView>
 
