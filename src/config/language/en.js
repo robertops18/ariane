@@ -1,5 +1,11 @@
 export default {
     HOME: 'Welcome to the Gooapps React Native template',
     LOGOUT: "Logout",
-    CHANGE_PASSWD: "Change password"
+    CHANGE_PASSWD: "Change password",
+    ACTIVITIES: "ACTIVITIES AND TASKS",
+    SUBMIT_RATING: "Submit your rating",
+    TASK: 'Task',
+    ANSWER_SENDED: 'Answer sended',
+    ANSWER_ERROR: 'Error sending your answer',
+    CAMERA: 'Enable camera'
   };

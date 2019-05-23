@@ -11,6 +11,7 @@ import { MAIN_COLOR } from "react-native-dotenv";
 import PasswordRecover from "../screens/password-recover/password-recover";
 import Details from "../screens/details/details";
 import BackIcon from "../components/back-icon";
+import DetailsTasks from "../screens/details/Details-Tasks";
 
 const commonOptions = {
   headerStyle: {
@@ -25,6 +26,14 @@ const AuthStack = createStackNavigator({ SignIn: LoginScreen, PasswordRecover: P
 
 const details = {
   screen: Details,
+  navigationOptions: ({navigation}) => ({
+    headerTransparent: true,
+    headerLeft: <BackIcon color='#780047' onPress={() => navigation.goBack() } />,
+  })
+};
+
+const detailsTasks = {
+  screen: DetailsTasks,
   navigationOptions: ({navigation}) => ({
     headerTransparent: true,
     headerLeft: <BackIcon color='#780047' onPress={() => navigation.goBack() } />,
@@ -59,7 +68,8 @@ const ListStack = createStackNavigator({
       headerTitle: "Field Trips"
     }
   },
-  Details: details
+  Details: details,
+  DetailsTasks: detailsTasks
 });
 
 const ProfileStack = createStackNavigator({

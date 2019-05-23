@@ -14,7 +14,12 @@ function mapStateToProps(state) {
 class ListItem extends React.Component {
 
     onPress = () => {
-      this.props.navigation.navigate('Details', {item: this.props.item});
+      if (this.props.name == 'field trips') {
+        this.props.navigation.navigate('Details', {item: this.props.item});
+      } else {
+        this.props.navigation.navigate('DetailsTasks', {item: this.props.item});
+      }
+
     };
 
     renderInfo = () => {

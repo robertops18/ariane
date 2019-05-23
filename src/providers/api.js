@@ -109,6 +109,20 @@ class Api {
         return false;
       }
     }
+
+    async submitAnswer(token, answer, taskId) {
+      const query = await customfetch(`${BASE_API}/answer/` + taskId, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+          answer: answer,
+        })
+      }, token);
+      return query ? await query.json() : false;
+    }
    
 }
 

@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, ScrollView, Dimensions, BackHandler} from 'react
 import MapView from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
 import List from "../../components/list";
+import translate from "../../utils/language.utils";
 
 
 export default class Details extends React.Component {
@@ -75,10 +76,15 @@ export default class Details extends React.Component {
                 <Text style={styles.text}>
                     {this.state.item.school.school_name}
                 </Text>
-                <List
-                  data={this.state.item.tasks}
-                  name={'tasks'}>
-                </List>
+                <View style={styles.tasks}>
+                  <Text style={styles.subtitle}>
+                    {translate('ACTIVITIES')}
+                  </Text>
+                  <List
+                    data={this.state.item.tasks}
+                    name={'tasks'}>
+                  </List>
+                </View>
               </View>
             </ScrollView>
 
@@ -103,7 +109,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 20,
         color: '#780047'
-        },
+    },
+
+    subtitle: {
+      fontFamily: 'Montserrat-Regular',
+      fontSize: 18,
+      color: '#780047'
+    },
     text: {
         color: '#070707',
         fontFamily: 'Montserrat-Regular',
@@ -115,5 +127,10 @@ const styles = StyleSheet.create({
     map: {
         height: 375,
         width: Dimensions.get('window').width,
+    },
+    tasks: {
+      width: '100%',
+      alignItems: 'center',
+      flex: 1,
     }
 });

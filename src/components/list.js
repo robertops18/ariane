@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, View, FlatList, Text, Linking} from "react-native";
+import {StyleSheet, View, FlatList, Text, Linking, Dimensions} from "react-native";
 import ListItem from './list-item';
 import HorizontalSeparator from './horizontal-separator'
 
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     container: {
         paddingVertical: 10,
         paddingHorizontal: 5,
+        width: Dimensions.get('window').width
     },
     emptyContainer: {
         flex: 1,
