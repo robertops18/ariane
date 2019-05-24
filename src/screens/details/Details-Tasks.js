@@ -80,7 +80,6 @@ class DetailsTasks extends React.Component {
               textContent={'Enviando...'}
               textStyle={styles.spinnerTextStyle}
             />
-            <DropdownAlert ref={ref => this.dropdown = ref} />
           </View>
         );
 
@@ -124,6 +123,7 @@ class DetailsTasks extends React.Component {
           {this.state.item.description}
         </Text>
         {this.renderTask()}
+        <DropdownAlert ref={ref => this.dropdown = ref} successImageSrc={require('../../../assets/tick_success.png')}/>
       </View>
     )
   }
