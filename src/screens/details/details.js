@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, ScrollView, Dimensions, BackHandler} from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
 import List from "../../components/list";
 import translate from "../../utils/language.utils";
@@ -18,8 +18,9 @@ export default class Details extends React.Component {
         longitudeDelta: 0.1
       },
       isMapReady: false,
-      item : this.props.navigation.state.params.item
-    }
+      item : this.props.navigation.state.params.item,
+      markers:[]
+    };
   }
 
   onMapLayout = () => {
@@ -44,11 +45,30 @@ export default class Details extends React.Component {
             longitudeDelta: 0.1
           }
           this.setState({region: region});
+
+          this.initMarkers();
         }).catch((err) => {
           console.log('Impossible to get latlng')
           console.log(err);
         });
     }
+
+    initMarkers = () => {
+      let markers = [];
+      for (var i = 0; i < this.state.item.tasks.length; i++) {
+        let task = this.state.item.tasks[i];
+        console.log(task);
+        markers[i] = {
+          key: i,
+          latlng: {
+            latitude: task.latitude,
+            longitude: task.longitude,
+          },
+          title: task.task_name
+        };
+      }
+      this.setState({markers: markers});
+    };
 
     componentWillUnmount() {
         this.backHandler.remove();
@@ -68,6 +88,13 @@ export default class Details extends React.Component {
                 region= {this.state.region}
                 onLayout={this.onMapLayout}
               >
+                {this.state.isMapReady && this.state.markers.map(marker => (
+                  <Marker
+                    key = {marker.key}
+                    coordinate={marker.latlng}
+                    title={marker.title}
+                  />
+                ))}
               </MapView>
               <View style={styles.infoContainer}>
                 <Text style={styles.title}>

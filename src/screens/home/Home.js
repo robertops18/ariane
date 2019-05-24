@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Map from "../../components/map";
 
-
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+    list: state.data.fieldTripsList
+  }
+}
 
 class HomeScreen extends Component {
   constructor(props) {
@@ -12,9 +17,11 @@ class HomeScreen extends Component {
   // LifeCycle
   render() {
     return (
-      <Map/>
+      <Map
+        fieldTrips={this.props.list}
+      />
     );
   }
 }
 
-export default connect(null)(HomeScreen);
+export default connect(mapStateToProps)(HomeScreen);

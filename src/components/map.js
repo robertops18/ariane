@@ -11,35 +11,40 @@ class Map extends React.Component{
           region: {
               latitude: 43.5314071,
               longitude: -5.7384944,
-              latitudeDelta: 1,
-              longitudeDelta: 1
+              latitudeDelta: 20,
+              longitudeDelta: 20
           },
-          currentLocation : null
+          currentLocation : null,
+          markers: []
         };
-        let markers = [];
-        markers[0] = {
-            key: 1,
-            latlng: {
-                latitude: 43.5314071,
-                longitude: -5.7384944,
-            },
-            title: 'Gijón',
-            description: 'Descripción de Gijón'
-        };
-        markers[1] = {
-            key: 2,
-            latlng: {
-                latitude: 43.3694815,
-                longitude: -5.8836773,
-            },
-            title: 'Oviedo',
-            description: 'Descripción de Oviedo'
-        };
-        this.state.markers = markers;
         //this.getLocation()
     }
 
-    onMapLayout = () => {
+    componentDidMount(): void {
+      this.initMarkers();
+    }
+
+    initMarkers = () => {
+      let markers = [];
+      for (let i = 0; i < this.props.fieldTrips.length; i++) {
+        let fieldTrip = this.props.fieldTrips[i];
+        for (let j = 0; j < fieldTrip.tasks.length; j++) {
+          let task = fieldTrip.tasks[j];
+          markers[task.id] = {
+            key: task.id,
+            latlng: {
+              latitude: task.latitude,
+              longitude: task.longitude,
+            },
+            title: task.task_name,
+            description: fieldTrip.field_title
+          }
+        }
+      }
+      this.setState({markers: markers});
+    }
+
+  onMapLayout = () => {
         this.setState({ isMapReady: true });
     };
 /*

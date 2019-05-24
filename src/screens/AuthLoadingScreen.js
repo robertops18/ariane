@@ -32,9 +32,11 @@ class AuthLoadingScreen extends React.Component {
             fieldTripsList
           }
         });
+        this.props.navigation.navigate("App");
       });
+    } else {
+      this.props.navigation.navigate("Auth");
     }
-    this.props.navigation.navigate(userToken ? "App" : "Auth");
   };
 
   async checkPermission() {
@@ -87,13 +89,25 @@ class AuthLoadingScreen extends React.Component {
   // Render any loading content that you like here
   render() {
     return (
-      <View>
-        <ActivityIndicator />
+      <View style={[styles.container, styles.horizontal]}>
+        <ActivityIndicator animating={true} size={'large'}/>
         <StatusBar barStyle='default' />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10
+  }
+})
 
 function mapStateToProps(state) {
   return {

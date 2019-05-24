@@ -20,7 +20,7 @@ class DetailsTasks extends React.Component {
     this.state = {
       item : this.props.navigation.state.params.item,
       starCount : 0,
-      animating: false
+      animating: false,
     }
   }
 
@@ -43,24 +43,14 @@ class DetailsTasks extends React.Component {
 
   sendTask = () => {
     this.state.animating = true;
-    console.log(this.props);
     API.submitAnswer(this.props.user.token, "Valoración: " + this.state.starCount, this.state.item.id).then((value) => {
       this.state.animating = false;
-      this.showAlert(translate('ANSWER_SENDED'));
+      this.showAlert('ok');
     }).catch((err) => {
       console.log(err);
       this.state.animating = false;
-      this.showAlert(translate('ANSWER_ERROR'));
+      this.showAlert(translate('error'));
     });
-  };
-
-  showAlert = (message) => {
-    Alert.alert(translate('TASK'),
-      message,
-      [
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
-      ],
-      {cancelable: false},)
   };
 
   renderTask = () => {
