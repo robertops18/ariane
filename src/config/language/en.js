@@ -7,5 +7,6 @@ export default {
     TASK: 'Task',
     ANSWER_SENDED: 'Answer sended',
     ANSWER_ERROR: 'Error sending your answer',
-    CAMERA: 'Enable camera'
+    CAMERA: 'Enable camera',
+    SENDING: 'Sending answer...'
   };

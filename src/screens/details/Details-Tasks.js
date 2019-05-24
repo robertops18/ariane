@@ -5,6 +5,8 @@ import {Button, Image} from "react-native-elements";
 import translate from "../../utils/language.utils";
 import API from "../../providers/api";
 import {connect} from "react-redux";
+import DropdownAlert from "react-native-dropdownalert";
+import Spinner from "react-native-loading-spinner-overlay";
 
 
 function mapStateToProps(state) {
@@ -21,6 +23,7 @@ class DetailsTasks extends React.Component {
       item : this.props.navigation.state.params.item,
       starCount : 0,
       animating: false,
+      alertMessage: ''
     }
   }
 
@@ -45,11 +48,11 @@ class DetailsTasks extends React.Component {
     this.state.animating = true;
     API.submitAnswer(this.props.user.token, "Valoración: " + this.state.starCount, this.state.item.id).then((value) => {
       this.state.animating = false;
-      this.showAlert('ok');
+      this.dropdown.alertWithType('success', translate("TASK"), translate("ANSWER_SENDED"));
     }).catch((err) => {
       console.log(err);
       this.state.animating = false;
-      this.showAlert(translate('error'));
+      this.dropdown.alertWithType('error', 'Error', translate("ANSWER_ERROR"));
     });
   };
 
@@ -72,7 +75,12 @@ class DetailsTasks extends React.Component {
               onPress={this.sendTask}
               disabled={this.state.starCount === 0}
             />
-            <ActivityIndicator size="large" color="#0000ff" animating={this.state.animating}/>
+            <Spinner
+              visible={this.state.animating}
+              textContent={'Enviando...'}
+              textStyle={styles.spinnerTextStyle}
+            />
+            <DropdownAlert ref={ref => this.dropdown = ref} />
           </View>
         );
 
@@ -165,6 +173,9 @@ const styles = StyleSheet.create({
   submitButton: {
     backgroundColor: '#0000ff',
     height: 50,
+  },
+  spinnerTextStyle: {
+    color: '#FFF'
   }
 });
 
