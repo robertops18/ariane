@@ -7,7 +7,6 @@ import com.facebook.react.ReactApplication;
 import com.devfd.RNGeocoder.RNGeocoderPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
-import com.swmansion.reanimated.ReanimatedPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.imagepicker.ImagePickerPackage;
@@ -55,7 +54,6 @@ public class MainApplication extends Application implements ReactApplication {
             new RNGeocoderPackage(),
             new MapsPackage(),
             new RNCWebViewPackage(),
-            new ReanimatedPackage(),
         new RNI18nPackage(),
         new RNDeviceInfo(),
         new ImagePickerPackage(),

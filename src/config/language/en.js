@@ -8,5 +8,7 @@ export default {
     ANSWER_SENDED: 'Answer sended',
     ANSWER_ERROR: 'Error sending your answer',
     CAMERA: 'Enable camera',
-    SENDING: 'Sending answer...'
+    SENDING: 'Sending answer...',
+    PLACEHOLDER_OPINION: 'Write your opinion and/or suggestions about the trip',
+    SEND: 'SEND'
   };

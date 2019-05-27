@@ -21,7 +21,6 @@ target 'ariane' do
   pod 'RNI18n', :path => '../node_modules/react-native-i18n'
   
 
-  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 

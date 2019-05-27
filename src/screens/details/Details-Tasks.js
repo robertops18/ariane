@@ -1,5 +1,15 @@
 import React from 'react';
-import {StyleSheet, Text, View, ActivityIndicator, Dimensions, BackHandler, Alert} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Dimensions,
+  BackHandler,
+  Alert,
+  TextInput,
+  ScrollView
+} from 'react-native';
 import StarRating from "react-native-star-rating";
 import {Button, Image} from "react-native-elements";
 import translate from "../../utils/language.utils";
@@ -7,6 +17,7 @@ import API from "../../providers/api";
 import {connect} from "react-redux";
 import DropdownAlert from "react-native-dropdownalert";
 import Spinner from "react-native-loading-spinner-overlay";
+import DismissKeyboardWrapper from "../../components/dismiss-keyboard-wrapper";
 
 
 function mapStateToProps(state) {
@@ -23,7 +34,8 @@ class DetailsTasks extends React.Component {
       item : this.props.navigation.state.params.item,
       starCount : 0,
       animating: false,
-      alertMessage: ''
+      alertMessage: '',
+      opinion: ''
     }
   }
 
@@ -44,7 +56,7 @@ class DetailsTasks extends React.Component {
     });
   }
 
-  sendTask = () => {
+  sendRating = () => {
     this.state.animating = true;
     API.submitAnswer(this.props.user.token, "Valoración: " + this.state.starCount, this.state.item.id).then((value) => {
       this.state.animating = false;
@@ -56,11 +68,27 @@ class DetailsTasks extends React.Component {
     });
   };
 
+  sendOpinion = () => {
+    this.state.animating = true;
+    API.submitAnswer(this.props.user.token, this.state.opinion, this.state.item.id).then((value) => {
+      this.state.animating = false;
+      this.dropdown.alertWithType('success', translate("TASK"), translate("ANSWER_SENDED"));
+    }).catch((err) => {
+      console.log(err);
+      this.state.animating = false;
+      this.dropdown.alertWithType('error', 'Error', translate("ANSWER_ERROR"));
+    });
+  };
+
+  onChangeText = (opinion) => {
+    this.setState({opinion: opinion});
+  };
+
   renderTask = () => {
     switch (this.state.item.type) {
       case 'VALORACIÓN':
         return (
-          <View>
+          <View style={{flex:1}}>
             <StarRating
               disabled={false}
               maxStars={5}
@@ -72,7 +100,7 @@ class DetailsTasks extends React.Component {
             <Button
               buttonStyle={styles.submitButton}
               title={translate('SUBMIT_RATING')}
-              onPress={this.sendTask}
+              onPress={this.sendRating}
               disabled={this.state.starCount === 0}
             />
             <Spinner
@@ -85,11 +113,34 @@ class DetailsTasks extends React.Component {
 
       case 'VIDEO':
         return (
-          <View>
+          <View style={{flex:1}}>
             <Button
               buttonStyle={styles.submitButton}
               title={translate('CAMERA')}
             />
+          </View>
+        )
+
+      case 'OPINIÓN':
+        return (
+          <View style={styles.textAreaContainer} >
+            <TextInput
+              ref={textArea => this._textArea = textArea}
+              onChangeText={(message) => this.onChangeText(message)}
+              style={styles.textArea}
+              underlineColorAndroid="transparent"
+              placeholder={translate("PLACEHOLDER_OPINION")}
+              placeholderTextColor="grey"
+              multiline={true}
+            />
+            <View style={{paddingTop: 20}}>
+              <Button
+                buttonStyle={styles.submitButton}
+                title={translate('SEND')}
+                onPress={this.sendOpinion}
+                disabled={this.state.opinion === ''}
+              />
+            </View>
           </View>
         )
     }
@@ -102,29 +153,34 @@ class DetailsTasks extends React.Component {
 
       case 'VIDEO':
         return require('../../../assets/tasks/video.jpg');
+
+      case 'OPINIÓN':
+        return require('../../../assets/tasks/feedback.jpg');
     }
   }
 
   render() {
     let imageUrl = this.getImage();
     return(
-      <View style={styles.container}>
-        <Image
-          style={styles.img}
-          source={imageUrl}
-        />
-        <Text style={styles.title}>
-          {this.state.item.task_name.toUpperCase()}
-        </Text>
-        <Text style={styles.question}>
-          {this.state.item.question}
-        </Text>
-        <Text style={styles.description}>
-          {this.state.item.description}
-        </Text>
-        {this.renderTask()}
-        <DropdownAlert ref={ref => this.dropdown = ref} successImageSrc={require('../../../assets/tick_success.png')}/>
-      </View>
+        <ScrollView style={{flex: 1}}>
+          <Image
+            style={styles.img}
+            source={imageUrl}
+          />
+          <View style={styles.container}>
+            <Text style={styles.title}>
+              {this.state.item.task_name.toUpperCase()}
+            </Text>
+            <Text style={styles.question}>
+              {this.state.item.question}
+            </Text>
+            <Text style={styles.description}>
+              {this.state.item.description}
+            </Text>
+            {this.renderTask()}
+          </View>
+          <DropdownAlert ref={ref => this.dropdown = ref} successImageSrc={require('../../../assets/tick_success.png')}/>
+        </ScrollView>
     )
   }
 
@@ -132,7 +188,6 @@ class DetailsTasks extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-start'
@@ -176,7 +231,21 @@ const styles = StyleSheet.create({
   },
   spinnerTextStyle: {
     color: '#FFF'
-  }
+  },
+  textAreaContainer: {
+    width: '80%'
+  },
+  textArea: {
+    justifyContent: 'flex-start',
+    fontFamily: 'Montserrat-Regular',
+    fontSize: 15,
+    borderColor: 'gray',
+    borderWidth: 1,
+    padding: 5,
+    borderRadius: 8,
+    height: 120,
+    textAlignVertical: "top"
+  },
 });
 
 export default connect(mapStateToProps)(DetailsTasks);
