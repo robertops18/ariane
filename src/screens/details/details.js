@@ -4,12 +4,14 @@ import MapView, {Marker} from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
 import List from "../../components/list";
 import translate from "../../utils/language.utils";
+import Moment from "moment";
 
 
 export default class Details extends React.Component {
 
   constructor(props) {
     super(props);
+    Moment.locale('es');
     this.state = {
       region : {
         latitude: 43.5314071,
@@ -100,8 +102,11 @@ export default class Details extends React.Component {
                 <Text style={styles.title}>
                     {this.state.item.field_title.toUpperCase()}
                 </Text>
-                <Text style={styles.text}>
+                <Text style={styles.subtitle}>
                     {this.state.item.school.school_name}
+                </Text>
+                <Text style={styles.text}>
+                  {Moment(this.state.item.init_date).format('D/M/YYYY')} - {Moment(this.state.item.finish_date).format('D/M/YYYY')}
                 </Text>
                 <View style={styles.tasks}>
                   <Text style={styles.subtitle}>
@@ -122,37 +127,42 @@ export default class Details extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'flex-start'
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'flex-start'
     },
     infoContainer: {
-        alignItems: 'flex-start',
-        padding: 30
+      padding: 30
     },
     title: {
-        fontFamily: 'Montserrat-Regular',
-        fontWeight: 'bold',
-        fontSize: 20,
-        color: '#780047'
+      fontFamily: 'Montserrat-Regular',
+      fontWeight: 'bold',
+      fontSize: 25,
+      color: '#780047',
+      alignItems: 'center',
+      textAlign: 'center',
+      paddingBottom: 10
     },
 
     subtitle: {
       fontFamily: 'Montserrat-Regular',
-      fontSize: 18,
-      color: '#780047'
+      fontSize: 20,
+      color: '#780047',
+      alignItems: 'center',
+      textAlign: 'center',
     },
     text: {
-        color: '#070707',
-        fontFamily: 'Montserrat-Regular',
-        fontSize: 15,
-        lineHeight: 23,
-        textAlign: 'justify',
-        marginVertical: 14
+      color: '#070707',
+      fontFamily: 'Montserrat-Regular',
+      fontSize: 15,
+      lineHeight: 23,
+      marginVertical: 14,
+      alignItems: 'center',
+      textAlign: 'center',
     },
     map: {
-        height: 375,
+        height: 300,
         width: Dimensions.get('window').width,
     },
     tasks: {

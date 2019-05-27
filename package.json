@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "jwt-decode": "^2.2.0",
+    "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "16.6.3",
     "react-native": "^0.58.0-rc.2",
