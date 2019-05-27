@@ -11,7 +11,6 @@ export default class Details extends React.Component {
 
   constructor(props) {
     super(props);
-    Moment.locale('es');
     this.state = {
       region : {
         latitude: 43.5314071,
@@ -76,6 +75,17 @@ export default class Details extends React.Component {
         this.backHandler.remove();
     }
 
+    showDates = () => {
+      let init = Moment(this.state.item.init_date).format('D/M/YYYY')
+      let finish = Moment(this.state.item.finish_date).format('D/M/YYYY')
+
+      if (init === finish) {
+        return Moment(this.state.item.init_date).format('D/M/YYYY');
+      } else {
+        return Moment(this.state.item.init_date).format('D/M/YYYY') + ' - ' + Moment(this.state.item.finish_date).format('D/M/YYYY');
+      }
+    }
+
     render() {
         return(
             <ScrollView style={{flex: 1}}>
@@ -106,7 +116,7 @@ export default class Details extends React.Component {
                     {this.state.item.school.school_name}
                 </Text>
                 <Text style={styles.text}>
-                  {Moment(this.state.item.init_date).format('D/M/YYYY')} - {Moment(this.state.item.finish_date).format('D/M/YYYY')}
+                  {this.showDates()}
                 </Text>
                 <View style={styles.tasks}>
                   <Text style={styles.subtitle}>
