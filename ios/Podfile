@@ -56,4 +56,11 @@ target 'ariane' do
   pod 'react-native-maps', path: rn_maps_path
   
 
+
+  pod 'react-native-video', :path => '../node_modules/react-native-video'
+
+  pod 'react-native-youtube', :path => '../node_modules/react-native-youtube'
+
+  pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
+
 end

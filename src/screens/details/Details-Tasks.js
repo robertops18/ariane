@@ -80,6 +80,10 @@ class DetailsTasks extends React.Component {
     });
   };
 
+  openVideo = () => {
+    this.props.navigation.navigate('Video', {url: this.state.item.question});
+  };
+
   onChangeText = (opinion) => {
     this.setState({opinion: opinion});
   };
@@ -113,10 +117,11 @@ class DetailsTasks extends React.Component {
 
       case 'VIDEO':
         return (
-          <View style={{flex:1}}>
+          <View>
             <Button
               buttonStyle={styles.submitButton}
-              title={translate('CAMERA')}
+              title={translate('VIDEO')}
+              onPress={this.openVideo}
             />
           </View>
         )

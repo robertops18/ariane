@@ -12,6 +12,7 @@ import PasswordRecover from "../screens/password-recover/password-recover";
 import Details from "../screens/details/details";
 import BackIcon from "../components/back-icon";
 import DetailsTasks from "../screens/details/Details-Tasks";
+import Video from "../screens/video/Video";
 
 const commonOptions = {
   headerStyle: {
@@ -36,6 +37,14 @@ const detailsTasks = {
   screen: DetailsTasks,
   navigationOptions: ({navigation}) => ({
     headerTransparent: true,
+    headerLeft: <BackIcon color='#780047' onPress={() => navigation.goBack() } />,
+  })
+};
+
+
+const video = {
+  screen: Video,
+  navigationOptions: ({navigation}) => ({
     headerLeft: <BackIcon color='#780047' onPress={() => navigation.goBack() } />,
   })
 };
@@ -69,8 +78,20 @@ const ListStack = createStackNavigator({
     }
   },
   Details: details,
-  DetailsTasks: detailsTasks
+  DetailsTasks: detailsTasks,
+  Video: video
 });
+
+ListStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 2) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
 
 const ProfileStack = createStackNavigator({
   Profile: {

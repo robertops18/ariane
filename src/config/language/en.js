@@ -7,7 +7,7 @@ export default {
     TASK: 'Task',
     ANSWER_SENDED: 'Answer sended',
     ANSWER_ERROR: 'Error sending your answer',
-    CAMERA: 'Enable camera',
+    VIDEO: 'WATCH VIDEO',
     SENDING: 'Sending answer...',
     PLACEHOLDER_OPINION: 'Write your opinion and/or suggestions about the trip',
     SEND: 'SEND'

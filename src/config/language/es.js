@@ -7,7 +7,7 @@ export default {
   TASK: 'Tarea',
   ANSWER_SENDED: 'Respuesta enviada',
   ANSWER_ERROR: 'Error enviando tu respuesta',
-  CAMERA: 'Activar cámara',
+  VIDEO: 'VER VÍDEO',
   SENDING: 'Enviando respuesta...',
   PLACEHOLDER_OPINION: 'Escribe tus opiniones y/o posibles mejoras sobre la salida',
   SEND: 'ENVIAR'
