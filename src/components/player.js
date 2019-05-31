@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
 import Video from "react-native-video";
-import {Slider} from "react-native-elements";
+import {Slider, Text} from "react-native-elements";
 import Icon from "react-native-vector-icons/Ionicons";
 
 export default class Player extends React.Component{
@@ -44,9 +44,25 @@ export default class Player extends React.Component{
     });
   }
 
+  pad(n, width, z=0) {
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+  }
+
+  minutesAndSeconds = (position) => ([
+    this.pad(Math.floor(position / 60), 2),
+    this.pad(position % 60, 2),
+  ]);
+
   render(){
+    const elapsed = this.minutesAndSeconds(this.state.currentPosition);
+    const total = this.minutesAndSeconds(this.state.totalDuration);
     return (
-      <View>
+      <View
+        borderWidth={2}
+        borderColor={'#000000'}
+        borderRadius={10}
+      >
         <Video
           ref="audioElement"
           source={{uri:this.props.audio}}
@@ -72,14 +88,19 @@ export default class Player extends React.Component{
             size={65}
           />}
         </TouchableOpacity>
-        <Slider
-          onSeek={this.seek.bind(this)}
-          maximumValue={Math.max(this.state.totalDuration, 1, this.state.currentPosition + 1)}
-          value={this.state.currentPosition}
-          onSlidingStart={() => this.setState({paused: true})}
-          onSlidingComplete={this.seek.bind(this)}
-          style={styles.slider}
-        />
+        <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
+          <Text style={styles.currentTime}>{elapsed[0] + ":" + elapsed[1]}</Text>
+          <Slider
+            onSeek={this.seek.bind(this)}
+            maximumValue={Math.max(this.state.totalDuration, 1, this.state.currentPosition + 1)}
+            value={this.state.currentPosition}
+            onSlidingStart={() => this.setState({paused: true})}
+            onSlidingComplete={this.seek.bind(this)}
+            style={styles.slider}
+          />
+          <Text style={styles.totalTime}>{total[0] + ":" + total[1]}</Text>
+        </View>
+
       </View>
     )
   }
@@ -91,8 +112,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   slider: {
-    width: Dimensions.get('window').width / 1.5,
-    alignSelf: 'center'
+    width: Dimensions.get('window').width / 1.8,
+    alignSelf: 'center',
+    marginLeft: 10,
+    paddingRight: 10
+  },
+  currentTime: {
+    marginLeft: 10
+  },
+  totalTime: {
+    paddingRight: 10
   }
 });
 

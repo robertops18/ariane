@@ -193,9 +193,11 @@ class DetailsTasks extends React.Component {
             <Text style={styles.title}>
               {this.state.item.task_name.toUpperCase()}
             </Text>
+            {this.state.item.type !== 'VIDEO' && this.state.item.type !== 'AUDIO' &&
             <Text style={styles.question}>
               {this.state.item.question}
             </Text>
+            }
             <Text style={styles.description}>
               {this.state.item.description}
             </Text>
