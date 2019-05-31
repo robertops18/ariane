@@ -52,6 +52,7 @@
     "react-native-orientation": "^3.1.3",
     "react-native-render-html": "^4.1.2",
     "react-native-simple-dialogs": "^1.1.0",
+    "react-native-slider": "^0.11.0",
     "react-native-snap-carousel": "^3.7.5",
     "react-native-star-rating": "^1.1.0",
     "react-native-tab-view": "^2.0.3",

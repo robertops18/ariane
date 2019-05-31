@@ -11,13 +11,13 @@ import {
   ScrollView
 } from 'react-native';
 import StarRating from "react-native-star-rating";
-import {Button, Image} from "react-native-elements";
+import {Button, Image, Slider} from "react-native-elements";
 import translate from "../../utils/language.utils";
 import API from "../../providers/api";
 import {connect} from "react-redux";
 import DropdownAlert from "react-native-dropdownalert";
 import Spinner from "react-native-loading-spinner-overlay";
-import DismissKeyboardWrapper from "../../components/dismiss-keyboard-wrapper";
+import Player from "../../components/player";
 
 
 function mapStateToProps(state) {
@@ -35,7 +35,7 @@ class DetailsTasks extends React.Component {
       starCount : 0,
       animating: false,
       alertMessage: '',
-      opinion: ''
+      opinion: '',
     }
   }
 
@@ -44,10 +44,6 @@ class DetailsTasks extends React.Component {
       this.props.navigation.goBack(); // works best when the goBack is async
       return true;
     });
-  }
-
-  componentWillUnmount() {
-    this.backHandler.remove();
   }
 
   onStarRatingPress(rating) {
@@ -148,8 +144,23 @@ class DetailsTasks extends React.Component {
             </View>
           </View>
         )
+
+      case 'AUDIO':
+        return (
+          <View>
+            <Player
+              audio={this.state.item.question}
+            />
+          </View>
+        )
+
+      default:
+        return (
+          <View></View>
+        )
     }
   };
+
 
   getImage = () => {
     switch (this.state.item.type) {
@@ -161,6 +172,12 @@ class DetailsTasks extends React.Component {
 
       case 'OPINIÓN':
         return require('../../../assets/tasks/feedback.jpg');
+
+      case 'DESCRIPCIÓN':
+        return require('../../../assets/tasks/description.jpg');
+
+      case 'AUDIO':
+        return require('../../../assets/tasks/audio.jpg');
     }
   }
 
@@ -251,6 +268,7 @@ const styles = StyleSheet.create({
     height: 120,
     textAlignVertical: "top"
   },
+
 });
 
 export default connect(mapStateToProps)(DetailsTasks);
