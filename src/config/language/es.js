@@ -10,5 +10,9 @@ export default {
   VIDEO: 'VER VÍDEO',
   SENDING: 'Enviando respuesta...',
   PLACEHOLDER_OPINION: 'Escribe tus opiniones y/o posibles mejoras sobre la salida',
-  SEND: 'ENVIAR'
+  SEND: 'ENVIAR',
+  ANSWER_OK_TITLE: '¡Respuesta correcta!',
+  ANSWER_OK_SUBTITLE: '¡Buen trabajo!',
+  ANSWER_NOT_OK_TITLE: 'Respuesta incorrecta',
+  ANSWER_NOT_OK_SUBTITLE: 'La respuesta correcta es: ',
 };

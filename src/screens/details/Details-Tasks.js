@@ -8,7 +8,8 @@ import {
   BackHandler,
   Alert,
   TextInput,
-  ScrollView
+  ScrollView,
+  Picker
 } from 'react-native';
 import StarRating from "react-native-star-rating";
 import {Button, Image, Slider} from "react-native-elements";
@@ -36,6 +37,7 @@ class DetailsTasks extends React.Component {
       animating: false,
       alertMessage: '',
       opinion: '',
+      selectedAnswer: this.props.navigation.state.params.item.options.split(';')[0]
     }
   }
 
@@ -82,6 +84,16 @@ class DetailsTasks extends React.Component {
 
   onChangeText = (opinion) => {
     this.setState({opinion: opinion});
+  };
+
+  checkAndSendAnswer = async () => {
+    await API.submitAnswer(this.props.user.token, this.state.selectedAnswer, this.state.item.id)
+    if (this.state.selectedAnswer === this.state.item.correct_answer) {
+      this.dropdown.alertWithType('success', translate("ANSWER_OK_TITLE"), translate("ANSWER_OK_SUBTITLE"));
+    } else {
+      this.dropdown.alertWithType('error', translate("ANSWER_NOT_OK_TITLE"),
+        translate("ANSWER_NOT_OK_SUBTITLE") + this.state.item.correct_answer);
+    }
   };
 
   renderTask = () => {
@@ -154,6 +166,39 @@ class DetailsTasks extends React.Component {
           </View>
         )
 
+      case 'TEST':
+        let options = this.state.item.options.split(';').map( (o, i) => {
+          return <Picker.Item key={i} value={o} label={o} />
+        });
+        console.log(this.state.item.options.split(';'));
+        return (
+          <View>
+            <View
+              borderWidth={2}
+              borderColor={'#000000'}
+              borderRadius={10}
+              style={styles.picker}
+            >
+              <Picker
+                selectedValue={this.state.selectedAnswer}
+                onValueChange={(itemValue, itemIndex) =>
+                  this.setState({selectedAnswer: itemValue})
+                }
+                style={{height: 50, width: 200, alignItems: 'center'}}
+              >
+                {options}
+              </Picker>
+            </View>
+            <View style={{padding: 10}}>
+              <Button
+                title={translate("SEND")}
+                buttonStyle={styles.submitButton}
+                onPress={this.checkAndSendAnswer}
+              />
+            </View>
+          </View>
+        )
+
       default:
         return (
           <View></View>
@@ -178,6 +223,12 @@ class DetailsTasks extends React.Component {
 
       case 'AUDIO':
         return require('../../../assets/tasks/audio.jpg');
+
+      case 'TEST':
+        return require('../../../assets/tasks/question.jpg');
+
+      default:
+        return require('../../../assets/tasks/fieldtrip.jpg');
     }
   }
 
@@ -270,7 +321,9 @@ const styles = StyleSheet.create({
     height: 120,
     textAlignVertical: "top"
   },
-
+  picker:{
+    padding: 5
+  }
 });
 
 export default connect(mapStateToProps)(DetailsTasks);
