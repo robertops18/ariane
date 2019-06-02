@@ -1,7 +1,6 @@
 import React from 'react';
-import {View, StyleSheet, Text, Dimensions, Alert} from 'react-native';
+import {StyleSheet, Alert} from 'react-native';
 import MapView, { Marker} from 'react-native-maps';
-import API from "../providers/api";
 
 class Map extends React.Component{
 
@@ -18,7 +17,6 @@ class Map extends React.Component{
           currentLocation : null,
           markers: []
         };
-        //this.getLocation()
     }
 
     componentDidMount(): void {
@@ -60,25 +58,12 @@ class Map extends React.Component{
       );
 
       this.setState({markers: markers});
-    }
+    };
 
-  onMapLayout = () => {
-        this.setState({ isMapReady: true });
+    onMapLayout = () => {
+          this.setState({ isMapReady: true });
     };
-/*
-    getLocation = () => {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          let latlng = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          };
-          this.setState({currentLocation: latlng});
-        },
-        error => Alert.alert(error.message)
-      );
-    };
-*/
+
     render(){
         return (
             <MapView

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, ScrollView, Dimensions, BackHandler, Alert} from 'react-native';
+import {StyleSheet, Dimensions, Alert} from 'react-native';
 import {ViroARSceneNavigator} from "react-viro";
 import API from "../../providers/api";
 import {connect} from "react-redux";
@@ -65,7 +65,6 @@ class ARScreen extends React.Component {
   }
 
   render() {
-    console.log(this.props.navigation.state.params.task);
     let scene = this.renderInitialScene();
     return(
       <ViroARSceneNavigator

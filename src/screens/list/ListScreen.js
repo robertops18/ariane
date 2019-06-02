@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {StyleSheet, ScrollView, RefreshControl} from "react-native";
-import { ListItem } from "react-native-elements";
 import API from "../../providers/api";
 import List from "../../components/list";
 

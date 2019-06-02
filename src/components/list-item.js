@@ -1,8 +1,7 @@
 import React from 'react';
-import {View, Image, Text, StyleSheet, Button, TouchableOpacity, Linking} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {withNavigation} from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons';
-import API from '../providers/api';
 import {connect} from "react-redux";
 
 function mapStateToProps(state) {

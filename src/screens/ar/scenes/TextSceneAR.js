@@ -7,14 +7,13 @@ import {StyleSheet} from 'react-native';
 import {
   ViroARScene,
   ViroText,
-  ViroConstants, ViroVideo,
+  ViroConstants,
 } from 'react-viro';
 
 export default class TextSceneAR extends Component {
 
   constructor(props) {
     super(props);
-    console.log(this.props);
     // Set initial state here
     this.state = {
       text : "Initializing AR..."

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, KeyboardAvoidingView, SafeAreaView, Image, StyleSheet, View, ActivityIndicator, Dimensions, Platform } from 'react-native';
+import { Alert, KeyboardAvoidingView, SafeAreaView, Image, StyleSheet, View, ActivityIndicator, Dimensions} from 'react-native';
 import Input from '../../components/text-input';
 import Button from '../../components/button';
 import TextLink from '../../components/text-link';

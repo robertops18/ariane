@@ -52,13 +52,10 @@ class Player extends React.Component{
       this.setState({paused: true});
       this.saveLog("Reproducción pausada");
     }
-    console.log(this.state);
   };
 
   async setDuration(data) {
-    console.log(data);
     await this.setState({totalDuration: Math.floor(data.duration)});
-    console.log(this.state);
   }
 
   async setTime(data) {

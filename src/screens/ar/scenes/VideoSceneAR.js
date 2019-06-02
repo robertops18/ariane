@@ -6,15 +6,13 @@ import {StyleSheet} from 'react-native';
 
 import {
   ViroARScene,
-  ViroText,
-  ViroConstants, ViroVideo,
+  ViroVideo,
 } from 'react-viro';
 
 export default class VideoSceneAR extends Component {
 
   constructor(props) {
     super(props);
-    console.log(this.props);
   }
 
   render() {

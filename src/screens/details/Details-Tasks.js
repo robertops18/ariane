@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   Dimensions,
   BackHandler,
   Alert,
@@ -208,7 +207,6 @@ class DetailsTasks extends React.Component {
         let options = this.state.item.options.split(';').map( (o, i) => {
           return <Picker.Item key={i} value={o} label={o} />
         });
-        console.log(this.state.item.options.split(';'));
         return (
           <View>
             <View

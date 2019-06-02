@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, View, FlatList, Text, Linking, Dimensions} from "react-native";
+import {StyleSheet, View, FlatList, Text, Dimensions} from "react-native";
 import ListItem from './list-item';
 import HorizontalSeparator from './horizontal-separator'
 

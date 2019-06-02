@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {BackHandler, StyleSheet, View} from "react-native";
+import {BackHandler, StyleSheet} from "react-native";
 import YouTube from "react-native-youtube";
 import Orientation from 'react-native-orientation';
 
@@ -39,7 +39,6 @@ class Video extends Component {
 
           onReady={e => {
             this.setState({ isReady: true })
-            console.log('Youtube video ready')
           }}
 
           style={styles.video}
