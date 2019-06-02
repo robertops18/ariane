@@ -48,6 +48,7 @@ class DetailsTasks extends React.Component {
       this.props.navigation.goBack(); // works best when the goBack is async
       return true;
     });
+    this.saveLog("Tarea visualizada");
   }
 
   componentWillUnmount(): void {
