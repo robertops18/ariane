@@ -5,6 +5,7 @@ import Geocoder from 'react-native-geocoder';
 import List from "../../components/list";
 import translate from "../../utils/language.utils";
 import Moment from "moment";
+import DropdownAlert from "react-native-dropdownalert";
 
 
 export default class Details extends React.Component {
@@ -20,7 +21,8 @@ export default class Details extends React.Component {
       },
       isMapReady: false,
       item : this.props.navigation.state.params.item,
-      markers:[]
+      markers:[],
+      firstLoad: true
     };
   }
 
@@ -33,6 +35,11 @@ export default class Details extends React.Component {
             this.props.navigation.goBack(); // works best when the goBack is async
             return true;
         });
+
+      if (this.state.firstLoad) {
+        this.setState({firstLoad: false});
+        this.dropdown.alertWithType('info', translate("INFO_LOGS_TITLE"), translate("INFO_LOGS_SUBTITLE"));
+      }
 
         let area = this.props.navigation.state.params.item.area;
         console.log(area);
@@ -128,8 +135,8 @@ export default class Details extends React.Component {
                   </List>
                 </View>
               </View>
+              <DropdownAlert ref={ref => this.dropdown = ref}/>
             </ScrollView>
-
         )
     }
 

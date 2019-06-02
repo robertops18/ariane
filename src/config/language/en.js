@@ -15,4 +15,6 @@ export default {
   ANSWER_OK_SUBTITLE: 'Great job!',
   ANSWER_NOT_OK_TITLE: 'Incorrect answer',
   ANSWER_NOT_OK_SUBTITLE: 'The correct answer is: ',
+  INFO_LOGS_TITLE: 'APP ACTIONS REGISTRY',
+  INFO_LOGS_SUBTITLE: 'All the actions performed in the app will be registered for their future analysis'
   };
