@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, ScrollView, Dimensions, BackHandler} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, Dimensions, BackHandler, Alert} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
 import List from "../../components/list";
@@ -75,6 +75,23 @@ export default class Details extends React.Component {
           title: task.task_name
         };
       }
+
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          let currentMarker = {
+            key: Math.random() * 10,
+            latlng: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            },
+            title: 'Tu ubicación',
+            description: 'Ubicación actual'
+          }
+          this.state.markers.push(currentMarker);
+        },
+        error => Alert.alert(error.message)
+      );
+
       this.setState({markers: markers});
     };
 
@@ -112,6 +129,7 @@ export default class Details extends React.Component {
                     key = {marker.key}
                     coordinate={marker.latlng}
                     title={marker.title}
+                    pinColor={marker.title === 'Tu ubicación' ? '#00ff00' : '#ff0000'}
                   />
                 ))}
               </MapView>
