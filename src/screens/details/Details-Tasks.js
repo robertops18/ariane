@@ -224,6 +224,15 @@ class DetailsTasks extends React.Component {
           />
         )
 
+      case 'VIDEO 360':
+        return (
+          <Button
+            title={translate('VIDEO')}
+            buttonStyle={styles.submitButton}
+            onPress={this.openAR}
+          />
+        )
+
       default:
         return (
           <View></View>
@@ -258,6 +267,9 @@ class DetailsTasks extends React.Component {
       case 'YOUTUBE':
         return require('../../../assets/tasks/youtube.jpg');
 
+      case 'VIDEO 360':
+        return require('../../../assets/tasks/360.jpg');
+
       default:
         return require('../../../assets/tasks/fieldtrip.jpg');
     }
@@ -275,7 +287,8 @@ class DetailsTasks extends React.Component {
             <Text style={styles.title}>
               {this.state.item.task_name.toUpperCase()}
             </Text>
-            {this.state.item.type !== 'VIDEO' && this.state.item.type !== 'AUDIO' && this.state.item.type !== 'YOUTUBE' &&
+            {this.state.item.type !== 'VIDEO' && this.state.item.type !== 'AUDIO' &&
+              this.state.item.type !== 'YOUTUBE' && this.state.item.type !== 'VIDEO 360' &&
             <Text style={styles.question}>
               {this.state.item.question}
             </Text>

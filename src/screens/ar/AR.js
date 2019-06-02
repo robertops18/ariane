@@ -2,8 +2,9 @@ import React from 'react';
 import {StyleSheet, Text, View, ScrollView, Dimensions, BackHandler} from 'react-native';
 import {ViroARSceneNavigator} from "react-viro";
 
-let TextARScene = require('./TextSceneAR');
-let VideoARScene = require('./VideoSceneAR');
+let TextARScene = require('./scenes/TextSceneAR');
+let VideoARScene = require('./scenes/VideoSceneAR');
+let Video360ARScene = require('./scenes/Video360SceneAR');
 
 export default class ARScreen extends React.Component {
 
@@ -25,8 +26,10 @@ export default class ARScreen extends React.Component {
     let scene;
     if (this.props.navigation.state.params.task.type === 'AR') {
       scene = TextARScene;
-    } else if(this.props.navigation.state.params.task.type === 'VIDEO') {
+    } else if (this.props.navigation.state.params.task.type === 'VIDEO') {
       scene = VideoARScene;
+    } else if (this.props.navigation.state.params.task.type === 'VIDEO 360') {
+      scene = Video360ARScene
     }
     return(
       <ViroARSceneNavigator
