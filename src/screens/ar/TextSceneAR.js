@@ -7,10 +7,10 @@ import {StyleSheet} from 'react-native';
 import {
   ViroARScene,
   ViroText,
-  ViroConstants,
+  ViroConstants, ViroVideo,
 } from 'react-viro';
 
-export default class SceneAR extends Component {
+export default class TextSceneAR extends Component {
 
   constructor(props) {
     super(props);
@@ -53,4 +53,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = SceneAR;
+module.exports = TextSceneAR;

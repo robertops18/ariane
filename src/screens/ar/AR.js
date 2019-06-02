@@ -2,7 +2,8 @@ import React from 'react';
 import {StyleSheet, Text, View, ScrollView, Dimensions, BackHandler} from 'react-native';
 import {ViroARSceneNavigator} from "react-viro";
 
-let InitialARScene = require('./SceneAR');
+let TextARScene = require('./TextSceneAR');
+let VideoARScene = require('./VideoSceneAR');
 
 export default class ARScreen extends React.Component {
 
@@ -21,10 +22,16 @@ export default class ARScreen extends React.Component {
 
   render() {
     console.log(this.props.navigation.state.params.task);
+    let scene;
+    if (this.props.navigation.state.params.task.type === 'AR') {
+      scene = TextARScene;
+    } else if(this.props.navigation.state.params.task.type === 'VIDEO') {
+      scene = VideoARScene;
+    }
     return(
       <ViroARSceneNavigator
         {...this.state.sharedProps}
-        initialScene={{scene: InitialARScene, passProps: {task: this.props.navigation.state.params.task}}}
+        initialScene={{scene: scene, passProps: {task: this.props.navigation.state.params.task}}}
       />
     )
   }

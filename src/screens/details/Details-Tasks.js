@@ -27,8 +27,6 @@ function mapStateToProps(state) {
   }
 }
 
-let InitialARScene = require('../ar/SceneAR');
-
 class DetailsTasks extends React.Component {
 
   constructor(props) {
@@ -50,6 +48,10 @@ class DetailsTasks extends React.Component {
       this.props.navigation.goBack(); // works best when the goBack is async
       return true;
     });
+  }
+
+  componentWillUnmount(): void {
+    this.setState({animating: false});
   }
 
   onStarRatingPress(rating) {
@@ -82,9 +84,13 @@ class DetailsTasks extends React.Component {
     });
   };
 
-  openVideo = () => {
+  openYoutube = () => {
     this.props.navigation.navigate('Video', {url: this.state.item.question});
   };
+
+  openAR = () => {
+    this.props.navigation.navigate('ARScreen', {task: this.state.item});
+  }
 
   onChangeText = (opinion) => {
     this.setState({opinion: opinion});
@@ -99,10 +105,6 @@ class DetailsTasks extends React.Component {
         translate("ANSWER_NOT_OK_SUBTITLE") + this.state.item.correct_answer);
     }
   };
-
-  openAR = () => {
-    this.props.navigation.navigate('ARScreen', {task: this.state.item});
-  }
 
   renderTask = () => {
     switch (this.state.item.type) {
@@ -123,13 +125,19 @@ class DetailsTasks extends React.Component {
               onPress={this.sendRating}
               disabled={this.state.starCount === 0}
             />
-            <Spinner
-              visible={this.state.animating}
-              textContent={'Enviando...'}
-              textStyle={styles.spinnerTextStyle}
-            />
           </View>
         );
+
+      case 'YOUTUBE':
+        return (
+          <View>
+            <Button
+              buttonStyle={styles.submitButton}
+              title={translate('VIDEO')}
+              onPress={this.openYoutube}
+            />
+          </View>
+        )
 
       case 'VIDEO':
         return (
@@ -137,7 +145,7 @@ class DetailsTasks extends React.Component {
             <Button
               buttonStyle={styles.submitButton}
               title={translate('VIDEO')}
-              onPress={this.openVideo}
+              onPress={this.openAR}
             />
           </View>
         )
@@ -247,6 +255,9 @@ class DetailsTasks extends React.Component {
       case 'AR':
         return require('../../../assets/tasks/AR.jpg');
 
+      case 'YOUTUBE':
+        return require('../../../assets/tasks/youtube.jpg');
+
       default:
         return require('../../../assets/tasks/fieldtrip.jpg');
     }
@@ -264,7 +275,7 @@ class DetailsTasks extends React.Component {
             <Text style={styles.title}>
               {this.state.item.task_name.toUpperCase()}
             </Text>
-            {this.state.item.type !== 'VIDEO' && this.state.item.type !== 'AUDIO' &&
+            {this.state.item.type !== 'VIDEO' && this.state.item.type !== 'AUDIO' && this.state.item.type !== 'YOUTUBE' &&
             <Text style={styles.question}>
               {this.state.item.question}
             </Text>
@@ -274,6 +285,11 @@ class DetailsTasks extends React.Component {
             </Text>
             {this.renderTask()}
           </View>
+          <Spinner
+            visible={this.state.animating}
+            textContent={'Cargando...'}
+            textStyle={styles.spinnerTextStyle}
+          />
           <DropdownAlert ref={ref => this.dropdown = ref} successImageSrc={require('../../../assets/tick_success.png')}/>
         </ScrollView>
     )
@@ -323,6 +339,7 @@ const styles = StyleSheet.create({
   submitButton: {
     backgroundColor: '#0000ff',
     height: 50,
+    width: 200
   },
   spinnerTextStyle: {
     color: '#FFF'

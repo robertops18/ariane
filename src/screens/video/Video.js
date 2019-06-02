@@ -44,6 +44,7 @@ class Video extends Component {
 
           style={styles.video}
         />
+
     );
   }
 }
