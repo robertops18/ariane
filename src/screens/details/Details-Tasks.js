@@ -60,7 +60,7 @@ class DetailsTasks extends React.Component {
     });
   }
 
-  sendRating = () => {
+  sendRating = async () => {
     this.state.animating = true;
     API.submitAnswer(this.props.user.token, "Valoración: " + this.state.starCount, this.state.item.id).then((value) => {
       this.state.animating = false;
@@ -70,7 +70,23 @@ class DetailsTasks extends React.Component {
       this.state.animating = false;
       this.dropdown.alertWithType('error', 'Error', translate("ANSWER_ERROR"));
     });
+
+    this.saveLog("Ha valorado la salida");
   };
+
+  saveLog(action) {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        let actionJSON = {
+          action: action,
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
+        API.saveLog(this.props.user.token, actionJSON, this.state.item.id);
+      },
+      error => Alert.alert(error.message)
+    );
+  }
 
   sendOpinion = () => {
     this.state.animating = true;
@@ -82,9 +98,12 @@ class DetailsTasks extends React.Component {
       this.state.animating = false;
       this.dropdown.alertWithType('error', 'Error', translate("ANSWER_ERROR"));
     });
+
+    this.saveLog("Ha opinado sobre la salida");
   };
 
   openYoutube = () => {
+    this.saveLog("Ha visualizado el vídeo de Youtube");
     this.props.navigation.navigate('Video', {url: this.state.item.question});
   };
 
@@ -100,9 +119,11 @@ class DetailsTasks extends React.Component {
     await API.submitAnswer(this.props.user.token, this.state.selectedAnswer, this.state.item.id)
     if (this.state.selectedAnswer === this.state.item.correct_answer) {
       this.dropdown.alertWithType('success', translate("ANSWER_OK_TITLE"), translate("ANSWER_OK_SUBTITLE"));
+      this.saveLog("Pregunta de test contestada correctamente");
     } else {
       this.dropdown.alertWithType('error', translate("ANSWER_NOT_OK_TITLE"),
         translate("ANSWER_NOT_OK_SUBTITLE") + this.state.item.correct_answer);
+      this.saveLog("Pregunta de test contestada incorrectamente");
     }
   };
 
@@ -177,7 +198,7 @@ class DetailsTasks extends React.Component {
         return (
           <View>
             <Player
-              audio={this.state.item.question}
+              audio={this.state.item}
             />
           </View>
         )
@@ -234,6 +255,7 @@ class DetailsTasks extends React.Component {
         )
 
       default:
+        this.saveLog("Descripción de la salida visualizada");
         return (
           <View></View>
         )

@@ -1,10 +1,18 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Dimensions, Alert} from 'react-native';
 import Video from "react-native-video";
 import {Slider, Text} from "react-native-elements";
 import Icon from "react-native-vector-icons/Ionicons";
+import API from "../providers/api";
+import {connect} from "react-redux";
 
-export default class Player extends React.Component{
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+
+class Player extends React.Component{
 
   state = {
     paused: true,
@@ -13,14 +21,36 @@ export default class Player extends React.Component{
   };
 
   componentDidMount(): void {
+    this.saveLog("Componente de audio iniciado");
+  }
 
+  componentWillUnmount(): void {
+    this.saveLog("Reproducción de audio terminada. Tiempo escuchado: " +
+      this.minutesAndSeconds(this.state.currentPosition)[0] + ':' + this.minutesAndSeconds(this.state.currentPosition)[1]
+      + ' minutos');
+  }
+
+  saveLog(action) {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        let actionJSON = {
+          action: action,
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
+        API.saveLog(this.props.user.token, actionJSON, this.props.audio.id);
+      },
+      error => Alert.alert(error.message)
+    );
   }
 
   playOrPause = () => {
     if (this.state.paused) {
       this.setState({paused: false});
+      this.saveLog("Reproducción iniciada");
     } else {
       this.setState({paused: true});
+      this.saveLog("Reproducción pausada");
     }
     console.log(this.state);
   };
@@ -65,7 +95,7 @@ export default class Player extends React.Component{
       >
         <Video
           ref="audioElement"
-          source={{uri:this.props.audio}}
+          source={{uri:this.props.audio.question}}
           onLoad={this.setDuration.bind(this)}
           onProgress={this.setTime.bind(this)}
           style={{width: 0, height: 0}}
@@ -125,3 +155,4 @@ const styles = StyleSheet.create({
   }
 });
 
+export default connect(mapStateToProps)(Player);

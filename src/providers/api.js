@@ -123,7 +123,22 @@ class Api {
       }, token);
       return query ? await query.json() : false;
     }
-   
+
+    async saveLog(token, action, taskId) {
+      const query = await customfetch(`${BASE_API}/log/` + taskId, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+          action: action.action,
+          lat: action.lat,
+          lng: action.lng
+        })
+      }, token);
+      return query ? await query.json() : false;
+    }
 }
 
 export default new Api();

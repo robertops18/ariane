@@ -1,12 +1,20 @@
 import React from 'react';
-import {StyleSheet, Text, View, ScrollView, Dimensions, BackHandler} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, Dimensions, BackHandler, Alert} from 'react-native';
 import {ViroARSceneNavigator} from "react-viro";
+import API from "../../providers/api";
+import {connect} from "react-redux";
 
 let TextARScene = require('./scenes/TextSceneAR');
 let VideoARScene = require('./scenes/VideoSceneAR');
 let Video360ARScene = require('./scenes/Video360SceneAR');
 
-export default class ARScreen extends React.Component {
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+
+class ARScreen extends React.Component {
 
   constructor(props) {
     super(props);
@@ -17,20 +25,48 @@ export default class ARScreen extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentWillUnmount(): void {
+    if (this.props.navigation.state.params.task.type === 'AR') {
+      this.saveLog("Experiencia de AR con texto finalizada");
+    } else if (this.props.navigation.state.params.task.type === 'VIDEO') {
+      this.saveLog("Experiencia de video en AR finalizada");
+    } else if (this.props.navigation.state.params.task.type === 'VIDEO 360') {
+      this.saveLog("Experiencia VR con vídeo 360º finalizada");
+    }
   }
 
+  saveLog(action) {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        let actionJSON = {
+          action: action,
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
+        API.saveLog(this.props.user.token, actionJSON, this.props.navigation.state.params.task.id);
+      },
+      error => Alert.alert(error.message)
+    );
+  }
+
+  renderInitialScene() {
+    let scene;
+    if (this.props.navigation.state.params.task.type === 'AR') {
+      this.saveLog("Experiencia de AR con texto iniciada");
+      scene = TextARScene;
+    } else if (this.props.navigation.state.params.task.type === 'VIDEO') {
+      this.saveLog("Experiencia de video en AR iniciada");
+      scene = VideoARScene;
+    } else if (this.props.navigation.state.params.task.type === 'VIDEO 360') {
+      this.saveLog("Experiencia VR con vídeo 360º iniciada");
+      scene = Video360ARScene
+    }
+    return scene;
+  }
 
   render() {
     console.log(this.props.navigation.state.params.task);
-    let scene;
-    if (this.props.navigation.state.params.task.type === 'AR') {
-      scene = TextARScene;
-    } else if (this.props.navigation.state.params.task.type === 'VIDEO') {
-      scene = VideoARScene;
-    } else if (this.props.navigation.state.params.task.type === 'VIDEO 360') {
-      scene = Video360ARScene
-    }
+    let scene = this.renderInitialScene();
     return(
       <ViroARSceneNavigator
         {...this.state.sharedProps}
@@ -87,3 +123,5 @@ const styles = StyleSheet.create({
     flex: 1,
   }
 });
+
+export default connect(mapStateToProps)(ARScreen);
