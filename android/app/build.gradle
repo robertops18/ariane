@@ -138,12 +138,12 @@ android {
    productFlavors {
           gvr {
               dimension "platform"
-              resValue 'string', 'app_name', 'Figment-gvr'
+              resValue 'string', 'app_name', 'Ariane'
               buildConfigField 'String', 'VR_PLATFORM', '"GVR"'
           }
           ovr {
               dimension "platform"
-              resValue 'string', 'app_name', 'Figment-ovr'
+              resValue 'string', 'app_name', 'Ariane'
               applicationIdSuffix '.ovr'
               buildConfigField 'String', 'VR_PLATFORM', '"OVR_MOBILE"'
           }
