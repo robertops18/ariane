@@ -13,6 +13,7 @@ import Details from "../screens/details/details";
 import BackIcon from "../components/back-icon";
 import DetailsTasks from "../screens/details/Details-Tasks";
 import Video from "../screens/video/Video";
+import ARScreen from "../screens/ar/AR";
 
 const commonOptions = {
   headerStyle: {
@@ -49,6 +50,14 @@ const video = {
   })
 };
 
+const ar = {
+  screen: ARScreen,
+  navigationOptions: ({navigation}) => ({
+    headerLeft: <BackIcon color='#780047' onPress={() => navigation.goBack() } />,
+    header: null
+  })
+};
+
 const HomeStack = createStackNavigator({
   Home: {
     screen: HomeScreen,
@@ -79,7 +88,8 @@ const ListStack = createStackNavigator({
   },
   Details: details,
   DetailsTasks: detailsTasks,
-  Video: video
+  Video: video,
+  ARScreen: ar
 });
 
 ListStack.navigationOptions = ({ navigation }) => {

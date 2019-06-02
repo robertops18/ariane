@@ -27,6 +27,8 @@ function mapStateToProps(state) {
   }
 }
 
+let InitialARScene = require('../ar/SceneAR');
+
 class DetailsTasks extends React.Component {
 
   constructor(props) {
@@ -37,7 +39,9 @@ class DetailsTasks extends React.Component {
       animating: false,
       alertMessage: '',
       opinion: '',
-      selectedAnswer: this.props.navigation.state.params.item.options.split(';')[0]
+      selectedAnswer: this.props.navigation.state.params.item.options !== '' && this.props.navigation.state.params.item.options
+        ? this.props.navigation.state.params.item.options.split(';')[0]
+        : ''
     }
   }
 
@@ -95,6 +99,10 @@ class DetailsTasks extends React.Component {
         translate("ANSWER_NOT_OK_SUBTITLE") + this.state.item.correct_answer);
     }
   };
+
+  openAR = () => {
+    this.props.navigation.navigate('ARScreen', {task: this.state.item});
+  }
 
   renderTask = () => {
     switch (this.state.item.type) {
@@ -199,6 +207,15 @@ class DetailsTasks extends React.Component {
           </View>
         )
 
+      case 'AR':
+        return (
+          <Button
+            title={'AR'}
+            buttonStyle={styles.submitButton}
+            onPress={this.openAR}
+          />
+        )
+
       default:
         return (
           <View></View>
@@ -226,6 +243,9 @@ class DetailsTasks extends React.Component {
 
       case 'TEST':
         return require('../../../assets/tasks/question.jpg');
+
+      case 'AR':
+        return require('../../../assets/tasks/AR.jpg');
 
       default:
         return require('../../../assets/tasks/fieldtrip.jpg');

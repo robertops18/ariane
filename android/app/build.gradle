@@ -115,6 +115,7 @@ android {
   }
 
   defaultConfig {
+    flavorDimensions "platform"
     applicationId "com.uniovi.ariane"
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
@@ -134,6 +135,19 @@ android {
       include "armeabi-v7a", "x86"
     }
   }
+   productFlavors {
+          gvr {
+              dimension "platform"
+              resValue 'string', 'app_name', 'Figment-gvr'
+              buildConfigField 'String', 'VR_PLATFORM', '"GVR"'
+          }
+          ovr {
+              dimension "platform"
+              resValue 'string', 'app_name', 'Figment-ovr'
+              applicationIdSuffix '.ovr'
+              buildConfigField 'String', 'VR_PLATFORM', '"OVR_MOBILE"'
+          }
+      }
   buildTypes {
     release {
       minifyEnabled enableProguardInReleaseBuilds
@@ -174,6 +188,17 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation fileTree(dir: "libs", include: ["*.jar"])
+  implementation 'com.android.support:appcompat-v7:26.1.0'
+  implementation project(':arcore_client')
+  implementation project(path: ':viro_renderer')
+  implementation project(path: ':react_viro')
+  implementation 'com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-7'
+  implementation 'com.amazonaws:aws-android-sdk-core:2.2.+'
+  implementation 'com.amazonaws:aws-android-sdk-ddb:2.2.+'
+  implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.2.+'
+  implementation 'com.amazonaws:aws-android-sdk-cognito:2.2.+'
+  implementation 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.2.+'
+  implementation 'com.android.support:multidex:1.0.1'
 
 /* ----------------------------
    *    REACT NATIVE FIREBASE

@@ -22,7 +22,9 @@
     "test": "jest",
     "clean": "react-native-clean-project",
     "from-scratch": "react-native-clean-project $$ yarn install && react-native run-android",
-    "android-windows": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android"
+    "android-windows": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android",
+    "ar": "react-native run-android --variant=gvrDebug"
+
   },
   "jest": {
     "preset": "react-native"
