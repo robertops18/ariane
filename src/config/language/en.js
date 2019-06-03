@@ -16,5 +16,7 @@ export default {
   ANSWER_NOT_OK_TITLE: 'Incorrect answer',
   ANSWER_NOT_OK_SUBTITLE: 'The correct answer is: ',
   INFO_LOGS_TITLE: 'APP ACTIONS REGISTRY',
-  INFO_LOGS_SUBTITLE: 'All the actions performed in the app will be registered for their future analysis'
+  INFO_LOGS_SUBTITLE: 'All the actions performed in the app will be registered for their future analysis',
+  WARN_DISTANCE_TITLE: 'Get closer!',
+  WARN_DISTANCE_SUBTITLE: 'You have to be less than 50 meters away from the task in order to perform it',
   };

@@ -24,12 +24,12 @@
     "from-scratch": "react-native-clean-project $$ yarn install && react-native run-android",
     "android-windows": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android",
     "ar": "react-native run-android --variant=gvrDebug"
-
   },
   "jest": {
     "preset": "react-native"
   },
   "dependencies": {
+    "geolib": "^3.0.3",
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",

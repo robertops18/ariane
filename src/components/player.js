@@ -101,6 +101,7 @@ class Player extends React.Component{
         />
         <TouchableOpacity
           onPress={this.playOrPause}
+          disabled={!this.props.taskCanBePerformed}
         >
           {this.state.paused &&
           <Icon
@@ -124,6 +125,7 @@ class Player extends React.Component{
             onSlidingStart={() => this.setState({paused: true})}
             onSlidingComplete={this.seek.bind(this)}
             style={styles.slider}
+            disabled={!this.props.taskCanBePerformed}
           />
           <Text style={styles.totalTime}>{total[0] + ":" + total[1]}</Text>
         </View>

@@ -18,6 +18,7 @@ import {connect} from "react-redux";
 import DropdownAlert from "react-native-dropdownalert";
 import Spinner from "react-native-loading-spinner-overlay";
 import Player from "../../components/player";
+import * as geolib from "geolib";
 
 
 function mapStateToProps(state) {
@@ -38,7 +39,9 @@ class DetailsTasks extends React.Component {
       opinion: '',
       selectedAnswer: this.props.navigation.state.params.item.options !== '' && this.props.navigation.state.params.item.options
         ? this.props.navigation.state.params.item.options.split(';')[0]
-        : ''
+        : '',
+      distanceToTask: 0,
+      taskCanBePerformed: true
     }
   }
 
@@ -48,6 +51,30 @@ class DetailsTasks extends React.Component {
       return true;
     });
     this.saveLog("Tarea visualizada");
+    this.calculateDistance();
+  }
+
+  calculateDistance() {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        let distance = geolib.getDistance(position.coords, {
+          latitude: this.state.item.latitude,
+          longitude: this.state.item.longitude
+        });
+        this.setState({distanceToTask: distance});
+        //TODO: Uncomment in order to activate to minimum distance to task
+        /*
+        if (distance > 50) {
+          this.setState({taskCanBePerformed: false});
+          if (this.state.item.type !== 'DESCRIPCIÓN') {
+            this.dropdown.alertWithType('warn', translate('WARN_DISTANCE_TITLE'),
+              translate('WARN_DISTANCE_SUBTITLE'));
+          }
+        }
+        */
+      },
+      error => Alert.alert(error.message)
+    );
   }
 
   componentWillUnmount(): void {
@@ -144,7 +171,7 @@ class DetailsTasks extends React.Component {
               buttonStyle={styles.submitButton}
               title={translate('SUBMIT_RATING')}
               onPress={this.sendRating}
-              disabled={this.state.starCount === 0}
+              disabled={this.state.starCount === 0 || !this.state.taskCanBePerformed}
             />
           </View>
         );
@@ -156,6 +183,7 @@ class DetailsTasks extends React.Component {
               buttonStyle={styles.submitButton}
               title={translate('VIDEO')}
               onPress={this.openYoutube}
+              disabled={!this.state.taskCanBePerformed}
             />
           </View>
         )
@@ -167,6 +195,7 @@ class DetailsTasks extends React.Component {
               buttonStyle={styles.submitButton}
               title={translate('VIDEO')}
               onPress={this.openAR}
+              disabled={!this.state.taskCanBePerformed}
             />
           </View>
         )
@@ -183,12 +212,12 @@ class DetailsTasks extends React.Component {
               placeholderTextColor="grey"
               multiline={true}
             />
-            <View style={{paddingTop: 20}}>
+            <View style={{paddingTop: 20, alignItems: 'center', justifyContent:'center'}}>
               <Button
                 buttonStyle={styles.submitButton}
                 title={translate('SEND')}
                 onPress={this.sendOpinion}
-                disabled={this.state.opinion === ''}
+                disabled={this.state.opinion === '' || !this.state.taskCanBePerformed}
               />
             </View>
           </View>
@@ -199,6 +228,7 @@ class DetailsTasks extends React.Component {
           <View>
             <Player
               audio={this.state.item}
+              taskCanBePerformed={this.state.taskCanBePerformed}
             />
           </View>
         )
@@ -230,6 +260,7 @@ class DetailsTasks extends React.Component {
                 title={translate("SEND")}
                 buttonStyle={styles.submitButton}
                 onPress={this.checkAndSendAnswer}
+                disabled={!this.state.taskCanBePerformed}
               />
             </View>
           </View>
@@ -241,6 +272,7 @@ class DetailsTasks extends React.Component {
             title={'AR'}
             buttonStyle={styles.submitButton}
             onPress={this.openAR}
+            disabled={!this.state.taskCanBePerformed}
           />
         )
 
@@ -250,10 +282,11 @@ class DetailsTasks extends React.Component {
             title={translate('VIDEO')}
             buttonStyle={styles.submitButton}
             onPress={this.openAR}
+            disabled={!this.state.taskCanBePerformed}
           />
         )
 
-      default:
+      default: //Descripción
         this.saveLog("Descripción de la salida visualizada");
         return (
           <View></View>
