@@ -63,15 +63,16 @@ class DetailsTasks extends React.Component {
         });
         this.setState({distanceToTask: distance});
         //TODO: Uncomment in order to activate to minimum distance to task
-        /*
+/*
         if (distance > 50) {
           this.setState({taskCanBePerformed: false});
+          let subtitle = translate('WARN_DISTANCE_SUBTITLE') + '\n' + translate('DISTANCE') + this.state.distanceToTask + ' m';
           if (this.state.item.type !== 'DESCRIPCIÓN') {
             this.dropdown.alertWithType('warn', translate('WARN_DISTANCE_TITLE'),
-              translate('WARN_DISTANCE_SUBTITLE'));
+              subtitle);
           }
         }
-        */
+*/
       },
       error => Alert.alert(error.message)
     );
@@ -269,7 +270,7 @@ class DetailsTasks extends React.Component {
       case 'AR':
         return (
           <Button
-            title={'AR'}
+            title={translate('START')}
             buttonStyle={styles.submitButton}
             onPress={this.openAR}
             disabled={!this.state.taskCanBePerformed}

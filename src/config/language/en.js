@@ -19,4 +19,6 @@ export default {
   INFO_LOGS_SUBTITLE: 'All the actions performed in the app will be registered for their future analysis',
   WARN_DISTANCE_TITLE: 'Get closer!',
   WARN_DISTANCE_SUBTITLE: 'You have to be less than 50 meters away from the task in order to perform it',
+  DISTANCE: 'Distance to the task: ',
+  START: 'START'
   };
