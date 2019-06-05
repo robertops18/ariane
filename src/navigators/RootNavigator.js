@@ -30,7 +30,7 @@ const details = {
   screen: Details,
   navigationOptions: ({navigation}) => ({
     headerTransparent: true,
-    headerLeft: <BackIcon color='#780047' onPress={() => navigation.goBack() } />,
+    headerLeft: <BackIcon color='#d25200' onPress={() => navigation.goBack() } />,
   })
 };
 
@@ -38,7 +38,7 @@ const detailsTasks = {
   screen: DetailsTasks,
   navigationOptions: ({navigation}) => ({
     headerTransparent: true,
-    headerLeft: <BackIcon color='#780047' onPress={() => navigation.goBack() } />,
+    headerLeft: <BackIcon color='#d25200' onPress={() => navigation.goBack() } />,
   })
 };
 
@@ -46,14 +46,14 @@ const detailsTasks = {
 const video = {
   screen: Video,
   navigationOptions: ({navigation}) => ({
-    headerLeft: <BackIcon color='#780047' onPress={() => navigation.goBack() } />,
+    headerLeft: <BackIcon color='#d25200' onPress={() => navigation.goBack() } />,
   })
 };
 
 const ar = {
   screen: ARScreen,
   navigationOptions: ({navigation}) => ({
-    headerLeft: <BackIcon color='#780047' onPress={() => navigation.goBack() } />,
+    headerLeft: <BackIcon color='#d25200' onPress={() => navigation.goBack() } />,
     header: null
   })
 };
@@ -132,7 +132,7 @@ const TabScreen = createBottomTabNavigator(
           backgroundColor: MAIN_COLOR
         },
         headerTitleStyle: {
-          color: "#fff"
+          color: "#fff",
         },
         tabBarIcon: ({ tintColor }) => <Ionicons name='ios-map' size={26} style={{ color: tintColor }} />
       }
@@ -169,7 +169,7 @@ const TabScreen = createBottomTabNavigator(
   {
     initialRouteName: "Home",
     tabBarOptions: {
-      activeTintColor: "tomato",
+      activeTintColor: "#10a4ec",
       inactiveTintColor: "gray",
       showLabel: true,
       style: {

@@ -84,13 +84,13 @@ class ChangePassword extends React.Component {
                 <SafeAreaView style={styles.container}>
                     <View>
                         <Image
-                            source={require('../../../assets/icon.png')}
+                            source={require('../../../assets/logo.png')}
                             style={styles.logo}
                         />
                         <ActivityIndicator
                             size="large"
                             style={{opacity: this.state.animating ? 1.0 : 0.0}}
-                            color='#780047'
+                            color='#d25200'
                         />
                         <Input
                             placeholder="Contraseña antigua"
@@ -130,10 +130,10 @@ const styles = StyleSheet.create({
         width: 300
     },
     logo: {
-        width: 280,
-        height: 90,
+        width: 250,
+        height: 250,
         resizeMode: 'contain',
-        marginBottom: 100,
+        marginBottom: 30,
     }
 });
 

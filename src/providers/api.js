@@ -27,8 +27,9 @@ class Api {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + token
             },
-            body: JSON.stringify({image: data})
+            body: data
         }, token);
+        console.log(query);
         return query ? await query.json() : false;
     };
 

@@ -12,8 +12,9 @@ import { ActivityIndicator } from "react-native";
 import ImagePicker from "react-native-image-picker";
 import TextLink from "../../components/text-link";
 import API from "../../providers/api";
+import ImageDataForm from "../../providers/image-data-form";
 import { MAIN_COLOR } from "react-native-dotenv";
-import { Avatar } from "react-native-elements";
+import {Image} from "react-native-elements";
 import translate from '../../utils/language.utils.js';
 
 
@@ -59,7 +60,8 @@ class SettingsScreen extends React.Component {
   };
 
   async handleUploadPhoto() {
-    await API.uploadAvatar(this.props.user.token, this.state.photo.data).then((res)=>console.log(res)).catch(err=>console.log(err));
+    let data = JSON.stringify({image:this.state.photo.data});
+    await API.uploadAvatar(this.props.user.token, data).then((res)=>console.log(res)).catch(err=>console.log(err));
 
     await API.getProfile(this.props.user.token).then(profile => {
       console.log(profile)
@@ -76,14 +78,8 @@ class SettingsScreen extends React.Component {
     const photo = this.state.photo;
     return (
       <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.container}>
-          <Avatar
-            size="xlarge"
-            rounded
-            source={photo.uri ? { uri: photo.uri } : require("../../../assets/default_avatar.jpg")}
-            showEditButton
-            editButton = {{ name: 'mode-edit', type: 'material', color: '#fff'}}
-            PlaceholderContent={<ActivityIndicator />}
-            onPress={this.handleChoosePhoto}
+          <Image
+            source={require('../../../assets/logo.png')}
           />
         <View>
           <View style={styles.infoContainer}>

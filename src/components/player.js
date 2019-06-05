@@ -126,6 +126,7 @@ class Player extends React.Component{
             onSlidingComplete={this.seek.bind(this)}
             style={styles.slider}
             disabled={!this.props.taskCanBePerformed}
+            thumbTintColor={'#10a4ec'}
           />
           <Text style={styles.totalTime}>{total[0] + ":" + total[1]}</Text>
         </View>

@@ -44,7 +44,7 @@ export default class TextSceneAR extends Component {
 
 var styles = StyleSheet.create({
   helloWorldTextStyle: {
-    fontFamily: 'Arial',
+    fontFamily: 'Montserrat-Regular',
     fontSize: 30,
     color: '#ffffff',
     textAlignVertical: 'center',

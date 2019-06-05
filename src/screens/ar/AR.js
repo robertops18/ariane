@@ -77,50 +77,7 @@ class ARScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'flex-start'
-  },
-  infoContainer: {
-    padding: 30
-  },
-  title: {
-    fontFamily: 'Montserrat-Regular',
-    fontWeight: 'bold',
-    fontSize: 25,
-    color: '#780047',
-    alignItems: 'center',
-    textAlign: 'center',
-    paddingBottom: 10
-  },
 
-  subtitle: {
-    fontFamily: 'Montserrat-Regular',
-    fontSize: 20,
-    color: '#780047',
-    alignItems: 'center',
-    textAlign: 'center',
-  },
-  text: {
-    color: '#070707',
-    fontFamily: 'Montserrat-Regular',
-    fontSize: 15,
-    lineHeight: 23,
-    marginVertical: 14,
-    alignItems: 'center',
-    textAlign: 'center',
-  },
-  map: {
-    height: 300,
-    width: Dimensions.get('window').width,
-  },
-  tasks: {
-    width: '100%',
-    alignItems: 'center',
-    flex: 1,
-  }
 });
 
 export default connect(mapStateToProps)(ARScreen);

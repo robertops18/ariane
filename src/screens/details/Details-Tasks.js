@@ -165,7 +165,7 @@ class DetailsTasks extends React.Component {
               maxStars={5}
               rating={this.state.starCount}
               selectedStar={(rating) => this.onStarRatingPress(rating)}
-              fullStarColor={'#780047'}
+              fullStarColor={'#d25200'}
               containerStyle={{paddingBottom: 20}}
             />
             <Button
@@ -378,18 +378,16 @@ const styles = StyleSheet.create({
   },
   title: {
     paddingTop: 20,
-    fontFamily: 'Montserrat-Regular',
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat-Bold',
     fontSize: 30,
-    color: '#780047',
+    color: '#d25200',
     width: '80%',
     alignItems: 'center',
     textAlign: 'center',
   },
   question: {
     paddingTop: 20,
-    fontWeight: 'bold',
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat-Bold',
     fontSize: 25,
     textAlign: 'center',
     width: '80%',
@@ -405,7 +403,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20
   },
   submitButton: {
-    backgroundColor: '#0000ff',
+    backgroundColor: '#10a4ec',
     height: 50,
     width: 200
   },

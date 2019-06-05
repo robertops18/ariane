@@ -153,7 +153,7 @@ export default class Details extends React.Component {
                   </List>
                 </View>
               </View>
-              <DropdownAlert ref={ref => this.dropdown = ref}/>
+              <DropdownAlert ref={ref => this.dropdown = ref} infoColor={'#10a4ec'}/>
             </ScrollView>
         )
     }
@@ -171,10 +171,9 @@ const styles = StyleSheet.create({
       padding: 30
     },
     title: {
-      fontFamily: 'Montserrat-Regular',
-      fontWeight: 'bold',
+      fontFamily: 'Montserrat-Bold',
       fontSize: 25,
-      color: '#780047',
+      color: '#d25200',
       alignItems: 'center',
       textAlign: 'center',
       paddingBottom: 10
@@ -183,7 +182,7 @@ const styles = StyleSheet.create({
     subtitle: {
       fontFamily: 'Montserrat-Regular',
       fontSize: 20,
-      color: '#780047',
+      color: '#d25200',
       alignItems: 'center',
       textAlign: 'center',
     },

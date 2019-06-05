@@ -47,7 +47,7 @@ class PasswordRecover extends React.Component {
                 <SafeAreaView style={styles.container}>
                     <View>
                         <Image
-                            source={require('../../../assets/uniovi.png')}
+                            source={require('../../../assets/logo.png')}
                             style={styles.logo}
                         />
                         <ActivityIndicator
@@ -83,10 +83,10 @@ const styles = StyleSheet.create({
         backgroundColor: MAIN_COLOR,
     },
     logo: {
-        width: 280,
-        height: 90,
+        width: 250,
+        height: 250,
         resizeMode: 'contain',
-        marginBottom: 100,
+        marginBottom: 30,
     }
 });
 

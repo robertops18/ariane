@@ -114,7 +114,7 @@ class Login extends React.Component {
             <DismissKeyboardWrapper style={{ flex: 1}}>
                 <View style={styles.container}>
                 <Image
-                        source={require('../../../assets/icon.png')}
+                        source={require('../../../assets/logo.png')}
                         style={styles.logo}/>
                     <ActivityIndicator
                         size="large"
@@ -165,10 +165,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: MAIN_COLOR,
     }, logo: {
-        width: 280,
-        height: 90,
+        width: 250,
+        height: 250,
         resizeMode: 'contain',
-        marginBottom: 100,
+        marginBottom: 30,
     },
 });
 
