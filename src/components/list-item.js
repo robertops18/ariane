@@ -13,7 +13,7 @@ function mapStateToProps(state) {
 class ListItem extends React.Component {
 
     onPress = () => {
-      if (this.props.name == 'field trips') {
+      if (this.props.name === 'field trips') {
         this.props.navigation.navigate('Details', {item: this.props.item});
       } else {
         this.props.navigation.navigate('DetailsTasks', {item: this.props.item});
@@ -38,7 +38,7 @@ class ListItem extends React.Component {
               numberOfLines={1}
               ellipsizeMode={'tail'}
             >
-              {this.props.item.school.school_name}
+              {this.props.item.students_group.group_name}
             </Text>
           </View>
         )

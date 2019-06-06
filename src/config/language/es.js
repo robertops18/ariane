@@ -18,7 +18,7 @@ export default {
   INFO_LOGS_TITLE: 'REGISTRO DE ACCIONES EN LA APP',
   INFO_LOGS_SUBTITLE: 'Todas las acciones realizadas en la app serán registradas para su posterior análisis.',
   WARN_DISTANCE_TITLE: '¡Acércate!',
-  WARN_DISTANCE_SUBTITLE: 'Debes estar a menos de 50 metros de distancia de la tarea para llevarla a cabo.',
+  WARN_DISTANCE_SUBTITLE: 'Debes estar a menos de 100 metros de distancia de la tarea para llevarla a cabo.',
   DISTANCE: 'Distancia a la tarea: ',
   START: 'EMPEZAR'
 };

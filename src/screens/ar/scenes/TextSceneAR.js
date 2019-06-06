@@ -23,22 +23,27 @@ export default class TextSceneAR extends Component {
     this._onInitialized = this._onInitialized.bind(this);
   }
 
-  render() {
-    return (
-      <ViroARScene onTrackingUpdated={this._onInitialized} >
-        <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} />
-      </ViroARScene>
-    );
-  }
-
   _onInitialized(state, reason) {
-    if (state == ViroConstants.TRACKING_NORMAL) {
+    if (state === ViroConstants.TRACKING_NORMAL) {
       this.setState({
         text : this.props.task.description
       });
-    } else if (state == ViroConstants.TRACKING_NONE) {
+    } else if (state === ViroConstants.TRACKING_NONE) {
       // Handle loss of tracking
     }
+  }
+
+  render() {
+    return (
+      <ViroARScene onTrackingUpdated={this._onInitialized} >
+        <ViroText
+          text={this.state.text}
+          scale={[.5, .5, .5]}
+          position={[0, 0, -1]}
+          style={styles.helloWorldTextStyle}
+        />
+      </ViroARScene>
+    );
   }
 }
 

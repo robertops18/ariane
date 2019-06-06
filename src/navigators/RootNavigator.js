@@ -38,7 +38,7 @@ const detailsTasks = {
   screen: DetailsTasks,
   navigationOptions: ({navigation}) => ({
     headerTransparent: true,
-    headerLeft: <BackIcon color='#d25200' onPress={() => navigation.goBack() } />,
+    headerLeft: <BackIcon color='#d25200' onPress={() => navigation.goBack()}/>
   })
 };
 
@@ -83,7 +83,7 @@ const ListStack = createStackNavigator({
       headerTitleStyle: {
         color: "#fff"
       },
-      headerTitle: "Field Trips"
+      headerTitle: "Salidas"
     }
   },
   Details: details,
@@ -113,7 +113,7 @@ const ProfileStack = createStackNavigator({
       headerTitleStyle: {
         color: "#fff"
       },
-      headerTitle: "My profile"
+      headerTitle: "Perfil"
     }
   },
   ChangePassword: {
@@ -127,7 +127,7 @@ const TabScreen = createBottomTabNavigator(
     Home: {
       screen: HomeStack,
       navigationOptions: {
-        tabBarLabel: "Map",
+        tabBarLabel: "Mapa",
         headerStyle: {
           backgroundColor: MAIN_COLOR
         },
@@ -141,7 +141,7 @@ const TabScreen = createBottomTabNavigator(
       screen: ListStack,
       path: "userList",
       navigationOptions: {
-        tabBarLabel: "Field trips",
+        tabBarLabel: "Salidas",
         headerStyle: {
           backgroundColor: MAIN_COLOR
         },
@@ -155,7 +155,7 @@ const TabScreen = createBottomTabNavigator(
     Settings: {
       screen: ProfileStack,
       navigationOptions: {
-        tabBarLabel: "Profile",
+        tabBarLabel: "Perfil",
         headerStyle: {
           backgroundColor: MAIN_COLOR
         },

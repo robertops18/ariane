@@ -138,7 +138,7 @@ export default class Details extends React.Component {
                     {this.state.item.field_title.toUpperCase()}
                 </Text>
                 <Text style={styles.subtitle}>
-                    {this.state.item.school.school_name}
+                    {this.state.item.students_group.group_name}
                 </Text>
                 <Text style={styles.text}>
                   {this.showDates()}

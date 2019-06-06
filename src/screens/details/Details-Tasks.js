@@ -8,7 +8,8 @@ import {
   Alert,
   TextInput,
   ScrollView,
-  Picker
+  Picker,
+  ActivityIndicator
 } from 'react-native';
 import StarRating from "react-native-star-rating";
 import {Button, Image, Slider} from "react-native-elements";
@@ -64,7 +65,7 @@ class DetailsTasks extends React.Component {
         this.setState({distanceToTask: distance});
         //TODO: Uncomment in order to activate to minimum distance to task
 /*
-        if (distance > 50) {
+        if (distance > 100) {
           this.setState({taskCanBePerformed: false});
           let subtitle = translate('WARN_DISTANCE_SUBTITLE') + '\n' + translate('DISTANCE') + this.state.distanceToTask + ' m';
           if (this.state.item.type !== 'DESCRIPCIÓN') {
@@ -297,36 +298,40 @@ class DetailsTasks extends React.Component {
 
 
   getImage = () => {
-    switch (this.state.item.type) {
-      case 'VALORACIÓN':
-        return require('../../../assets/tasks/rating.jpg');
+    if (this.state.item.image_url) {
+      return {uri: this.state.item.image_url}
+    } else {
+      switch (this.state.item.type) {
+        case 'VALORACIÓN':
+          return require('../../../assets/tasks/rating.jpg');
 
-      case 'VIDEO':
-        return require('../../../assets/tasks/video.jpg');
+        case 'VIDEO':
+          return require('../../../assets/tasks/video.jpg');
 
-      case 'OPINIÓN':
-        return require('../../../assets/tasks/feedback.jpg');
+        case 'OPINIÓN':
+          return require('../../../assets/tasks/feedback.jpg');
 
-      case 'DESCRIPCIÓN':
-        return require('../../../assets/tasks/description.jpg');
+        case 'DESCRIPCIÓN':
+          return require('../../../assets/tasks/description.jpg');
 
-      case 'AUDIO':
-        return require('../../../assets/tasks/audio.jpg');
+        case 'AUDIO':
+          return require('../../../assets/tasks/audio.jpg');
 
-      case 'TEST':
-        return require('../../../assets/tasks/question.jpg');
+        case 'TEST':
+          return require('../../../assets/tasks/question.jpg');
 
-      case 'AR':
-        return require('../../../assets/tasks/AR.jpg');
+        case 'AR':
+          return require('../../../assets/tasks/AR.jpg');
 
-      case 'YOUTUBE':
-        return require('../../../assets/tasks/youtube.jpg');
+        case 'YOUTUBE':
+          return require('../../../assets/tasks/youtube.jpg');
 
-      case 'VIDEO 360':
-        return require('../../../assets/tasks/360.jpg');
+        case 'VIDEO 360':
+          return require('../../../assets/tasks/360.jpg');
 
-      default:
-        return require('../../../assets/tasks/fieldtrip.jpg');
+        default:
+          return require('../../../assets/tasks/fieldtrip.jpg');
+      }
     }
   }
 
@@ -337,6 +342,7 @@ class DetailsTasks extends React.Component {
           <Image
             style={styles.img}
             source={imageUrl}
+            PlaceholderContent={<ActivityIndicator size={'large'} color={'#10a4ec'}/>}
           />
           <View style={styles.container}>
             <Text style={styles.title}>
@@ -358,7 +364,10 @@ class DetailsTasks extends React.Component {
             textContent={'Cargando...'}
             textStyle={styles.spinnerTextStyle}
           />
-          <DropdownAlert ref={ref => this.dropdown = ref} successImageSrc={require('../../../assets/tick_success.png')}/>
+          <DropdownAlert ref={ref => this.dropdown = ref}
+                         successImageSrc={require('../../../assets/tick_success.png')}
+                         elevation={10}
+          />
         </ScrollView>
     )
   }
