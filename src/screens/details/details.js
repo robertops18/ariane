@@ -8,7 +8,7 @@ import Moment from "moment";
 import DropdownAlert from "react-native-dropdownalert";
 
 
-export default class Details extends React.Component {
+export class Details extends React.Component {
 
   constructor(props) {
     super(props);
@@ -203,3 +203,5 @@ const styles = StyleSheet.create({
       flex: 1,
     }
 });
+
+export default Details;

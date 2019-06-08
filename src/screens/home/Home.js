@@ -9,7 +9,7 @@ function mapStateToProps(state) {
   }
 }
 
-class HomeScreen extends Component {
+export class HomeScreen extends Component {
   constructor(props) {
     super(props);
   }

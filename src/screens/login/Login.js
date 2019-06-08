@@ -7,10 +7,9 @@ import { connect } from 'react-redux';
 import API from "../../providers/api";
 import DismissKeyboardWrapper from '../../components/dismiss-keyboard-wrapper';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import FCM from "../../providers/firebase";
 import { MAIN_COLOR } from 'react-native-dotenv'
 
-class Login extends React.Component {
+export class Login extends React.Component {
 
     componentDidMount() {
         this.mounted = true;
@@ -71,18 +70,6 @@ class Login extends React.Component {
                         }
                       });
                     });
-
-                    FCM.hasPermissions().then((data) => {
-                        if(!data){
-                            FCM.requestPermissions();
-                        }
-                    });
-
-                    FCM.registerToken().then((data) => {
-                        if(data){
-                            API.registerToken(user.token, data);
-                        }
-                    })
 
                     this.props.navigation.navigate("App");
 

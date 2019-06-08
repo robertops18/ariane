@@ -17,7 +17,7 @@ class Input extends React.Component {
     };
 
     render(){
-        dynamicStyle = this.props.light ? {borderColor: 'white', borderWidth: 1.5, color: 'white'} : {borderWidth: 1, borderColor: this.state.color};
+        const dynamicStyle = this.props.light ? {borderColor: 'white', borderWidth: 1.5, color: 'white'} : {borderWidth: 1, borderColor: this.state.color};
         return(
             <TextInput
                 style={[{...this.props.styles}, styles.input, dynamicStyle]}

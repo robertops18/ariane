@@ -14,7 +14,7 @@ function mapStateToProps(state) {
   }
 }
 
-class ARScreen extends React.Component {
+export class ARScreen extends React.Component {
 
   constructor(props) {
     super(props);

@@ -11,7 +11,7 @@ function mapStateToProps(state) {
   }
 }
 
-class ListScreen extends Component {
+export class ListScreen extends Component {
   constructor(props) {
     super(props);
   }

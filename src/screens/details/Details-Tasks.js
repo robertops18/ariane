@@ -28,7 +28,7 @@ function mapStateToProps(state) {
   }
 }
 
-class DetailsTasks extends React.Component {
+export class DetailsTasks extends React.Component {
 
   constructor(props) {
     super(props);
