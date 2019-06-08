@@ -92,15 +92,12 @@ class DetailsTasks extends React.Component {
   sendRating = async () => {
     this.state.animating = true;
     API.submitAnswer(this.props.user.token, "Valoración: " + this.state.starCount, this.state.item.id).then((value) => {
+      this.saveLog("Ha valorado la salida");
       this.state.animating = false;
-      this.dropdown.alertWithType('success', translate("TASK"), translate("ANSWER_SENDED"));
     }).catch((err) => {
       console.log(err);
       this.state.animating = false;
-      this.dropdown.alertWithType('error', 'Error', translate("ANSWER_ERROR"));
     });
-
-    this.saveLog("Ha valorado la salida");
   };
 
   saveLog(action) {
@@ -120,15 +117,16 @@ class DetailsTasks extends React.Component {
   sendOpinion = () => {
     this.state.animating = true;
     API.submitAnswer(this.props.user.token, this.state.opinion, this.state.item.id).then((value) => {
+      this.saveLog("Ha opinado sobre la salida");
       this.state.animating = false;
-      this.dropdown.alertWithType('success', translate("TASK"), translate("ANSWER_SENDED"));
+      this.sendRating().then(() => {
+        this.dropdown.alertWithType('success', translate("TASK"), translate("ANSWER_SENDED"));
+      });
     }).catch((err) => {
       console.log(err);
       this.state.animating = false;
       this.dropdown.alertWithType('error', 'Error', translate("ANSWER_ERROR"));
     });
-
-    this.saveLog("Ha opinado sobre la salida");
   };
 
   openYoutube = () => {
@@ -160,7 +158,7 @@ class DetailsTasks extends React.Component {
     switch (this.state.item.type) {
       case 'VALORACIÓN':
         return (
-          <View style={{flex:1}}>
+          <View style={styles.textAreaContainer} >
             <StarRating
               disabled={false}
               maxStars={5}
@@ -169,12 +167,23 @@ class DetailsTasks extends React.Component {
               fullStarColor={'#d25200'}
               containerStyle={{paddingBottom: 20}}
             />
-            <Button
-              buttonStyle={styles.submitButton}
-              title={translate('SUBMIT_RATING')}
-              onPress={this.sendRating}
-              disabled={this.state.starCount === 0 || !this.state.taskCanBePerformed}
+            <TextInput
+              ref={textArea => this._textArea = textArea}
+              onChangeText={(message) => this.onChangeText(message)}
+              style={styles.textArea}
+              underlineColorAndroid="transparent"
+              placeholder={translate("PLACEHOLDER_OPINION")}
+              placeholderTextColor="grey"
+              multiline={true}
             />
+            <View style={{paddingTop: 20, alignItems: 'center', justifyContent:'center', paddingBottom: 20}}>
+              <Button
+                buttonStyle={styles.submitButton}
+                title={translate('SEND')}
+                onPress={this.sendOpinion}
+                disabled={this.state.opinion === '' || !this.state.taskCanBePerformed || this.state.starCount === 0}
+              />
+            </View>
           </View>
         );
 
@@ -298,9 +307,7 @@ class DetailsTasks extends React.Component {
 
 
   getImage = () => {
-    if (this.state.item.image_url) {
-      return {uri: this.state.item.image_url}
-    } else {
+    if (!this.state.item.image_url ) {
       switch (this.state.item.type) {
         case 'VALORACIÓN':
           return require('../../../assets/tasks/rating.jpg');
@@ -332,6 +339,8 @@ class DetailsTasks extends React.Component {
         default:
           return require('../../../assets/tasks/fieldtrip.jpg');
       }
+    } else {
+      return {uri: this.state.item.image_url}
     }
   }
 
@@ -414,7 +423,7 @@ const styles = StyleSheet.create({
   submitButton: {
     backgroundColor: '#10a4ec',
     height: 50,
-    width: 200
+    width: 200,
   },
   spinnerTextStyle: {
     color: '#FFF'

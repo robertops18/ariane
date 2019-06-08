@@ -42,10 +42,8 @@ export default class Details extends React.Component {
       }
 
         let area = this.props.navigation.state.params.item.area;
-        console.log(area);
 
         Geocoder.geocodeAddress(area).then((res) => {
-          console.log(res);
           let region = {
             latitude: res[0].position.lat,
             longitude: res[0].position.lng,
