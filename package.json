@@ -20,7 +20,7 @@
     "apk": "cd android && ./gradlew assembleRelease",
     "rename": "node ./bin/rename.js",
     "start": "react-native start",
-    "test": "jest",
+    "test": "jest --detectOpenHandles --silent",
     "clean": "react-native-clean-project",
     "from-scratch": "react-native-clean-project $$ yarn install && react-native run-android",
     "android-windows": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android",

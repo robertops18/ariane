@@ -16,15 +16,15 @@ import configureMockStore from "redux-mock-store";
 import ChangePassword from "./src/screens/change-password/change-password";
 import {HomeScreen} from "./src/screens/home/Home";
 import {ListScreen} from "./src/screens/list/ListScreen";
+import {Video} from "./src/screens/video/Video";
 import {Details} from "./src/screens/details/details";
-import {DetailsTasks} from "./src/screens/details/Details-Tasks";
 
 
 const mockStore = configureMockStore();
 const store = mockStore({});
 
 //APP
-it('Render app without crashing', () => {
+it('Render app without crashing', async () => {
   const rendered = renderer.create(<App />, {
     createNodeMock: (element) => {
       if (element.type === PersistGate) { return element.props.children }
@@ -35,48 +35,48 @@ it('Render app without crashing', () => {
 });
 
 //COMPONENTS
-it ('Render custom button', () => {
+it ('Render custom button', async () => {
   const rendered = renderer.create(<CustomButton label={'test button'}/>);
   expect(rendered).toBeTruthy();
 });
 
-it ('Render back icon', () => {
+it ('Render back icon', async () => {
   const rendered = renderer.create(<BackIcon />);
   expect(rendered).toBeTruthy();
 });
 
-it ('Render list', () => {
+it ('Render list', async () => {
   const rendered = renderer.create(<List />);
   expect(rendered).toBeTruthy();
 });
 
-it ('Render map', () => {
+it ('Render map', async () => {
   const rendered = renderer.create(<Map fieldTrips={[]}/>);
   expect(rendered).toBeTruthy();
 });
 
-it ('Render input', () => {
+it ('Render input', async () => {
   const rendered = renderer.create(<Input />);
   expect(rendered).toBeTruthy();
 });
 
-it ('Render text link', () => {
+it ('Render text link', async () => {
   const rendered = renderer.create(<TextLink />);
   expect(rendered).toBeTruthy();
 });
 
 //SCREENS
-it ('Render login screen', () => {
+it ('Render login screen', async () => {
   const rendered = renderer.create(<Provider store={store}><Login/></Provider>);
   expect(rendered).toBeTruthy();
 });
 
-it ('Render change password screen', () => {
+it ('Render change password screen', async () => {
   const rendered = renderer.create(<Provider store={store}><ChangePassword/></Provider>);
   expect(rendered).toBeTruthy();
 });
 
-it ('Render profile screen', () => {
+it ('Render profile screen', async () => {
   const rendered = renderer.create(<SettingsScreen profile={{
     "profile": {
       "username": "rober",
@@ -88,18 +88,19 @@ it ('Render profile screen', () => {
   expect(rendered).toBeTruthy();
 });
 
-it ('Render password recovery screen', () => {
+it ('Render password recovery screen', async () => {
   const rendered = renderer.create(<PasswordRecover/>);
   expect(rendered).toBeTruthy();
 });
 
-it ('Render home screen', () => {
+it ('Render home screen', async () => {
   const rendered = renderer.create(<Provider store={store}><HomeScreen list={[]}/></Provider>);
   expect(rendered).toBeTruthy();
 });
 
-it ('Render field trips list screen', () => {
+it ('Render field trips list screen', async () => {
   const rendered = renderer.create(<Provider store={store}><ListScreen /></Provider>);
   expect(rendered).toBeTruthy();
 });
 
+//TODO: Faltan las pantallas que reciben parámetros por el navigation

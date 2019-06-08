@@ -34,6 +34,17 @@ jest.mock('react-native-gesture-handler', () => {
 
 jest.mock('react-native-maps', () => 'AirGoogleMaps');
 
+jest.mock('react-native-orientation', () => {
+  return {
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    lockToPortrait: jest.fn(),
+    lockToLandscape: jest.fn(),
+    unlockAllOrientations: jest.fn(),
+  };
+});
+
+
 global.navigator = {
   userAgent: 'node.js',
 };

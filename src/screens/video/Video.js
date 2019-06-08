@@ -5,7 +5,7 @@ import YouTube from "react-native-youtube";
 import Orientation from 'react-native-orientation';
 
 
-class Video extends Component {
+export class Video extends Component {
   constructor(props) {
     super(props);
   }
