@@ -44,7 +44,6 @@ jest.mock('react-native-orientation', () => {
   };
 });
 
-
 global.navigator = {
   userAgent: 'node.js',
 };

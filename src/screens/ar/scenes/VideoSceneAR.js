@@ -21,7 +21,7 @@ export default class VideoSceneAR extends Component {
         <ViroVideo
           source={{uri: this.props.task.question}}
           loop={true}
-          position={[0,0,-7]}
+          position={[0,0,-8]}
           scale={[7, 4, 0]}
         />
       </ViroARScene>

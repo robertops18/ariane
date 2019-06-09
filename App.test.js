@@ -16,9 +16,6 @@ import configureMockStore from "redux-mock-store";
 import ChangePassword from "./src/screens/change-password/change-password";
 import {HomeScreen} from "./src/screens/home/Home";
 import {ListScreen} from "./src/screens/list/ListScreen";
-import {Video} from "./src/screens/video/Video";
-import {Details} from "./src/screens/details/details";
-
 
 const mockStore = configureMockStore();
 const store = mockStore({});
@@ -102,5 +99,3 @@ it ('Render field trips list screen', async () => {
   const rendered = renderer.create(<Provider store={store}><ListScreen /></Provider>);
   expect(rendered).toBeTruthy();
 });
-
-//TODO: Faltan las pantallas que reciben parámetros por el navigation
