@@ -8,7 +8,7 @@ import List from "./src/components/list";
 import Map from "./src/components/map";
 import Input from "./src/components/text-input";
 import TextLink from "./src/components/text-link";
-import {SettingsScreen} from "./src/screens/profile/Settings";
+import {SettingsScreen} from "./src/screens/settings/Settings";
 import PasswordRecover from "./src/screens/password-recover/password-recover";
 import Login from "./src/screens/login/Login";
 import {Provider} from "react-redux";
@@ -91,7 +91,7 @@ it ('Render password recovery screen', async () => {
 });
 
 it ('Render home screen', async () => {
-  const rendered = renderer.create(<Provider store={store}><HomeScreen list={[]}/></Provider>);
+  const rendered = renderer.create(<Provider store={store}><HomeScreen list={[]} user={{token:''}}/></Provider>);
   expect(rendered).toBeTruthy();
 });
 

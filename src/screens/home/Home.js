@@ -19,6 +19,7 @@ export class HomeScreen extends Component {
     return (
       <Map
         fieldTrips={this.props.list}
+        token={this.props.user.token}
       />
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Alert} from 'react-native';
 import MapView, { Marker} from 'react-native-maps';
+import API from "../providers/api";
 
 class Map extends React.Component{
 
@@ -20,25 +21,12 @@ class Map extends React.Component{
     }
 
     componentDidMount(): void {
-      this.initMarkers();
+
     }
 
-    initMarkers = () => {
-
-      let markers = [];
-      this.props.fieldTrips.forEach((field_trip) => {
-        field_trip.tasks.forEach((task) => {
-          markers[task.id] = {
-            key: task.id,
-            latlng: {
-              latitude: task.latitude,
-              longitude: task.longitude,
-            },
-            title: task.task_name,
-            description: field_trip.field_title
-          }
-        })
-      })
+    initMarkers = async () => {
+      let markers = await API.getFieldTripMarkers(this.props.token);
+      this.setState({markers: markers});
 
       navigator.geolocation.getCurrentPosition(
         position => {
@@ -50,17 +38,19 @@ class Map extends React.Component{
             },
             title: 'Tu ubicación',
             description: 'Ubicación actual'
-          }
-          this.state.markers.push(currentMarker);
+          };
+          this.setState(preState => (
+              {markers: [...preState.markers, currentMarker]}
+            )
+          );
         },
         error => Alert.alert(error.message)
       );
-
-      this.setState({markers: markers});
     };
 
-    onMapLayout = () => {
-          this.setState({ isMapReady: true });
+    onMapLayout = async () => {
+      await this.initMarkers();
+      this.setState({ isMapReady: true });
     };
 
     render(){
