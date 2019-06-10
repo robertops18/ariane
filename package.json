@@ -59,6 +59,10 @@
       "./assets/fonts/"
     ]
   },
+  "resolutions": {
+    "color-convert": "github:zbarbuto/color-convert",
+    "uglify-js": "github:alexlamsl/UglifyJS2#issue-2449"
+  },
   "dependencies": {
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",

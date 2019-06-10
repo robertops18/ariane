@@ -36,6 +36,7 @@ import com.google.gms.googleservices.GoogleServicesPlugin
  *   // bundleInFreeDebug: true,
  *   // bundleInPaidRelease: true,
  *   // bundleInBeta: true,
+ *   bundleInGvrRelease: true,
  *
  *   // whether to disable dev mode in custom build variants (by default only disabled in release)
  *   // for example: to disable dev mode in the staging build type (if configured)
@@ -52,6 +53,7 @@ import com.google.gms.googleservices.GoogleServicesPlugin
  *
  *   // where to put the JS bundle asset in release mode
  *   jsBundleDirRelease: "$buildDir/intermediates/assets/release",
+ *   jsBundleDirGvrRelease: "$buildDir/intermediates/assets/gvr/release",
  *
  *   // where to put drawable resources / React Native assets, e.g. the ones you use via
  *   // require('./image.png')), in debug mode
@@ -60,6 +62,7 @@ import com.google.gms.googleservices.GoogleServicesPlugin
  *   // where to put drawable resources / React Native assets, e.g. the ones you use via
  *   // require('./image.png')), in release mode
  *   resourcesDirRelease: "$buildDir/intermediates/res/merged/release",
+ *   resourcesDirGvrRelease: "$buildDir/intermediates/res/merged/gvr/release",
  *
  *   // by default the gradle tasks are skipped if none of the JS files or assets change; this means
  *   // that we don't look at files in android/ or ios/ to determine whether the tasks are up to
@@ -77,7 +80,10 @@ import com.google.gms.googleservices.GoogleServicesPlugin
  */
 
 project.ext.react = [
-  entryFile: "index.js"
+  entryFile: "index.js",
+  bundleInGvrRelease: true,
+  resourcesDirGvrRelease: "$buildDir/intermediates/res/merged/gvr/release",
+  bundleAssetName: "index.android.bundle"
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"

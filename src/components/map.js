@@ -15,7 +15,7 @@ class Map extends React.Component{
               longitudeDelta: 20
           },
           currentLocation : null,
-          markers: []
+          markers: [],
         };
     }
 
@@ -24,11 +24,10 @@ class Map extends React.Component{
     }
 
     initMarkers = () => {
+
       let markers = [];
-      for (let i = 0; i < this.props.fieldTrips.length; i++) {
-        let fieldTrip = this.props.fieldTrips[i];
-        for (let j = 0; j < fieldTrip.tasks.length; j++) {
-          let task = fieldTrip.tasks[j];
+      this.props.fieldTrips.forEach((field_trip) => {
+        field_trip.tasks.forEach((task) => {
           markers[task.id] = {
             key: task.id,
             latlng: {
@@ -36,10 +35,10 @@ class Map extends React.Component{
               longitude: task.longitude,
             },
             title: task.task_name,
-            description: fieldTrip.field_title
+            description: field_trip.field_title
           }
-        }
-      }
+        })
+      })
 
       navigator.geolocation.getCurrentPosition(
         position => {
