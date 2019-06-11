@@ -6,6 +6,7 @@ import List from "../../components/list";
 import translate from "../../utils/language.utils";
 import Moment from "moment";
 import DropdownAlert from "react-native-dropdownalert";
+import Orientation from "react-native-orientation";
 
 
 export class Details extends React.Component {
@@ -24,6 +25,10 @@ export class Details extends React.Component {
       markers:[],
       firstLoad: true
     };
+  }
+
+  componentWillMount(): void {
+    Orientation.lockToPortrait();
   }
 
   onMapLayout = () => {

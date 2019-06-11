@@ -20,6 +20,7 @@ import DropdownAlert from "react-native-dropdownalert";
 import Spinner from "react-native-loading-spinner-overlay";
 import Player from "../../components/player";
 import * as geolib from "geolib";
+import Orientation from "react-native-orientation";
 
 
 function mapStateToProps(state) {
@@ -44,6 +45,10 @@ export class DetailsTasks extends React.Component {
       distanceToTask: 0,
       taskCanBePerformed: true
     }
+  }
+
+  componentWillMount(): void {
+    Orientation.lockToPortrait();
   }
 
   componentDidMount() {

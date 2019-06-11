@@ -16,6 +16,7 @@ import Icon from '../../components/back-icon';
 import API from "../../providers/api";
 import DismissKeyboardWrapper from "../../components/dismiss-keyboard-wrapper";
 import KeyboardSpacer from "react-native-keyboard-spacer";
+import Orientation from "react-native-orientation";
 
 function mapStateToProps(state) {
     return {
@@ -42,6 +43,10 @@ class ChangePassword extends React.Component {
         newPass: '',
         newPassRep: ''
     };
+
+  componentWillMount(): void {
+    Orientation.lockToPortrait();
+  }
 
     componentDidMount() {
         this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {

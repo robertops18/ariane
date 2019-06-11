@@ -8,6 +8,7 @@ import API from "../../providers/api";
 import DismissKeyboardWrapper from '../../components/dismiss-keyboard-wrapper';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { MAIN_COLOR } from 'react-native-dotenv'
+import Orientation from "react-native-orientation";
 
 export class Login extends React.Component {
 
@@ -19,6 +20,10 @@ export class Login extends React.Component {
     componentWillUnmount(){
         this.mounted = false;
     }
+
+  componentWillMount(): void {
+    Orientation.lockToPortrait();
+  }
 
     static navigationOptions = ({ navigation }) => {
         return {

@@ -7,6 +7,7 @@ import BackIcon from '../../components/back-icon';
 import KeyboardSpacer from "react-native-keyboard-spacer";
 import DismissKeyboardWrapper from "../../components/dismiss-keyboard-wrapper";
 import { MAIN_COLOR } from "react-native-dotenv";
+import Orientation from "react-native-orientation";
 
 
 
@@ -21,6 +22,10 @@ class PasswordRecover extends React.Component {
         animating: false,
         email: ''
     };
+
+  componentWillMount(): void {
+    Orientation.lockToPortrait();
+  }
 
     handlePassRecover = async () => {
         this.setState({animating: true});

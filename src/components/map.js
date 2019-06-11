@@ -12,8 +12,8 @@ class Map extends React.Component{
           region: {
               latitude: 43.5314071,
               longitude: -5.7384944,
-              latitudeDelta: 20,
-              longitudeDelta: 20
+              latitudeDelta: 5,
+              longitudeDelta: 5
           },
           currentLocation : null,
           markers: [],
@@ -21,7 +21,18 @@ class Map extends React.Component{
     }
 
     componentDidMount(): void {
-
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          let region = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.5,
+            longitudeDelta: 0.5
+          }
+          this.setState({region: region});
+        },
+        error => Alert.alert(error.message)
+      );
     }
 
     initMarkers = async () => {
@@ -31,13 +42,14 @@ class Map extends React.Component{
       navigator.geolocation.getCurrentPosition(
         position => {
           let currentMarker = {
-            key: Math.random() * 10,
+            key: 0,
             latlng: {
               latitude: position.coords.latitude,
               longitude: position.coords.longitude,
             },
             title: 'Tu ubicación',
-            description: 'Ubicación actual'
+            description: 'Ubicación actual',
+            color: '#ffffff'
           };
           this.setState(preState => (
               {markers: [...preState.markers, currentMarker]}
@@ -72,7 +84,7 @@ class Map extends React.Component{
                         coordinate={marker.latlng}
                         title={marker.title}
                         description={marker.description}
-                        pinColor={marker.title === 'Tu ubicación' ? '#00ff00' : '#ff0000'}
+                        pinColor={marker.color}
                     />
                 ))}
             </MapView>

@@ -3,11 +3,16 @@ import { ActivityIndicator, StatusBar, StyleSheet, View, Alert } from "react-nat
 import { connect } from "react-redux";
 import { MAIN_COLOR } from "react-native-dotenv";
 import API from "../providers/api";
+import Orientation from "react-native-orientation";
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
     super(props);
     this.checkIfUserHasLoggedIn();
+  }
+
+  componentWillMount(): void {
+    Orientation.lockToPortrait();
   }
 
   // Fetch the token from storage then navigate to our appropriate place

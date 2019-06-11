@@ -3,6 +3,7 @@ import {StyleSheet, Dimensions, Alert} from 'react-native';
 import {ViroARSceneNavigator} from "react-viro";
 import API from "../../providers/api";
 import {connect} from "react-redux";
+import Orientation from "react-native-orientation";
 
 let TextARScene = require('./scenes/TextSceneAR');
 let VideoARScene = require('./scenes/VideoSceneAR');
@@ -23,6 +24,10 @@ export class ARScreen extends React.Component {
         apiKey:"4B297AD2-2DC8-4EA9-A89E-9BE6C1047B48",
       }
     };
+  }
+
+  componentWillMount(): void {
+    Orientation.lockToPortrait();
   }
 
   componentWillUnmount(): void {

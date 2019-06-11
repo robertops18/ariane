@@ -14,7 +14,7 @@ import TextLink from "../../components/text-link";
 import API from "../../providers/api";
 import ImageDataForm from "../../providers/image-data-form";
 import { MAIN_COLOR } from "react-native-dotenv";
-import {Image} from "react-native-elements";
+import {Avatar, Image} from "react-native-elements";
 import translate from '../../utils/language.utils.js';
 
 
@@ -42,13 +42,13 @@ export class SettingsScreen extends React.Component {
   render() {
     return (
       <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.container}>
-          <Image
-            source={require('../../../assets/logo.png')}
-          />
+        <Image
+          source={require('../../../assets/logo.png')}
+        />
         <View>
           <View style={styles.infoContainer}>
             <Text style={styles.textName}>{this.props.profile.profile.username.toUpperCase()}</Text>
-            <Text style={styles.textSurname}>{`${this.props.profile.profile.name} ${this.props.profile.profile.surname ? this.props.profile.profile.surname : ''}`} </Text>
+            <Text style={styles.textSurname}>{`${this.props.profile.profile.name} ${this.props.profile.profile.surname}`} </Text>
 
             <Text style={styles.textEmail}>{this.props.profile.profile.email}</Text>
           </View>

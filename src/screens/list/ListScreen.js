@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {StyleSheet, ScrollView, RefreshControl} from "react-native";
 import API from "../../providers/api";
 import List from "../../components/list";
+import Orientation from "react-native-orientation";
 
 function mapStateToProps(state) {
   return {
@@ -19,6 +20,10 @@ export class ListScreen extends Component {
   state = {
     refreshing: false
   };
+
+  componentWillMount(): void {
+    Orientation.lockToPortrait();
+  }
 
   _onRefresh = () => {
     this.setState({refreshing: true});
