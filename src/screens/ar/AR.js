@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Dimensions, Alert} from 'react-native';
+import {StyleSheet, Dimensions, Alert, View} from 'react-native';
 import {ViroARSceneNavigator} from "react-viro";
 import API from "../../providers/api";
 import {connect} from "react-redux";
@@ -22,7 +22,7 @@ export class ARScreen extends React.Component {
     this.state = {
       sharedProps :{
         apiKey:"4B297AD2-2DC8-4EA9-A89E-9BE6C1047B48",
-      }
+      },
     };
   }
 

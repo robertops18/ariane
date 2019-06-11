@@ -20,5 +20,6 @@ export default {
   WARN_DISTANCE_TITLE: 'Get closer!',
   WARN_DISTANCE_SUBTITLE: 'You have to be less than 100 meters away from the task in order to perform it',
   DISTANCE: 'Distance to the task: ',
-  START: 'START'
+  START: 'START',
+  ARCORE: 'Your device has to support ARCore in order to perform this task'
   };

@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Alert} from 'react-native';
 import MapView, { Marker} from 'react-native-maps';
 import API from "../providers/api";
+import {Image} from "react-native-elements";
 
 class Map extends React.Component{
 
@@ -85,7 +86,12 @@ class Map extends React.Component{
                         title={marker.title}
                         description={marker.description}
                         pinColor={marker.color}
-                    />
+                    >
+                      {marker.title === 'Tu ubicación' && <Image
+                        source={require('../../assets/stickman.png')}
+                        style={{width: 50, height: 71}}
+                      />}
+                    </Marker>
                 ))}
             </MapView>
         )

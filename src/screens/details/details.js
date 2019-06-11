@@ -7,6 +7,7 @@ import translate from "../../utils/language.utils";
 import Moment from "moment";
 import DropdownAlert from "react-native-dropdownalert";
 import Orientation from "react-native-orientation";
+import {Image} from "react-native-elements";
 
 
 export class Details extends React.Component {
@@ -54,12 +55,12 @@ export class Details extends React.Component {
             longitude: res[0].position.lng,
             latitudeDelta: 0.1,
             longitudeDelta: 0.1
-          }
+          };
           this.setState({region: region});
 
           this.initMarkers();
         }).catch((err) => {
-          console.log('Impossible to get latlng')
+          console.log('Impossible to get latlng');
           console.log(err);
         });
     }
@@ -68,9 +69,8 @@ export class Details extends React.Component {
       let markers = [];
       for (var i = 0; i < this.state.item.tasks.length; i++) {
         let task = this.state.item.tasks[i];
-        console.log(task);
         markers[i] = {
-          key: i,
+          key: task.id,
           latlng: {
             latitude: task.latitude,
             longitude: task.longitude,
@@ -82,14 +82,14 @@ export class Details extends React.Component {
       navigator.geolocation.getCurrentPosition(
         position => {
           let currentMarker = {
-            key: Math.random() * 10,
+            key: 0,
             latlng: {
               latitude: position.coords.latitude,
               longitude: position.coords.longitude,
             },
             title: 'Tu ubicación',
             description: 'Ubicación actual'
-          }
+          };
           this.state.markers.push(currentMarker);
         },
         error => Alert.alert(error.message)
@@ -132,8 +132,12 @@ export class Details extends React.Component {
                     key = {marker.key}
                     coordinate={marker.latlng}
                     title={marker.title}
-                    pinColor={marker.title === 'Tu ubicación' ? '#00ff00' : '#ff0000'}
-                  />
+                  >
+                    {marker.title === 'Tu ubicación' && <Image
+                      source={require('../../../assets/stickman.png')}
+                      style={{width: 50, height: 71}}
+                    />}
+                  </Marker>
                 ))}
               </MapView>
               <View style={styles.infoContainer}>

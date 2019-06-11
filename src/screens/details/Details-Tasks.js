@@ -9,7 +9,7 @@ import {
   TextInput,
   ScrollView,
   Picker,
-  ActivityIndicator
+  ActivityIndicator, NativeModules
 } from 'react-native';
 import StarRating from "react-native-star-rating";
 import {Button, Image, Slider} from "react-native-elements";
@@ -43,7 +43,8 @@ export class DetailsTasks extends React.Component {
         ? this.props.navigation.state.params.item.options.split(';')[0]
         : '',
       distanceToTask: 0,
-      taskCanBePerformed: true
+      taskCanBePerformed: true,
+      supportedAR: true
     }
   }
 
@@ -58,6 +59,7 @@ export class DetailsTasks extends React.Component {
     });
     this.saveLog("Tarea visualizada");
     this.calculateDistance();
+    this.checkAR();
   }
 
   calculateDistance() {
@@ -86,6 +88,16 @@ export class DetailsTasks extends React.Component {
 
   componentWillUnmount(): void {
     this.setState({animating: false});
+  }
+
+  checkAR() {
+    NativeModules.VRTARSceneNavigatorModule.isARSupportedOnDevice((result) =>{
+      if (result === 'SUPPORTED') {
+        this.setState({supportedAR: true});
+      } else {
+        this.setState({supportedAR: false});
+      }
+    });
   }
 
   onStarRatingPress(rating) {
@@ -140,8 +152,13 @@ export class DetailsTasks extends React.Component {
   };
 
   openAR = () => {
-    this.props.navigation.navigate('ARScreen', {task: this.state.item});
-  }
+    if (this.state.supportedAR) {
+      this.props.navigation.navigate('ARScreen', {task: this.state.item});
+    } else {
+      this.dropdown.alertWithType('warn', 'ARCore',
+        translate('ARCORE'));
+    }
+  };
 
   onChangeText = (opinion) => {
     this.setState({opinion: opinion});
@@ -309,7 +326,6 @@ export class DetailsTasks extends React.Component {
         )
     }
   };
-
 
   getImage = () => {
     if (!this.state.item.image_url ) {

@@ -20,5 +20,6 @@ export default {
   WARN_DISTANCE_TITLE: '¡Acércate!',
   WARN_DISTANCE_SUBTITLE: 'Debes estar a menos de 100 metros de distancia de la tarea para llevarla a cabo.',
   DISTANCE: 'Distancia a la tarea: ',
-  START: 'EMPEZAR'
+  START: 'EMPEZAR',
+  ARCORE: 'Tu dispositivo debe soportar ARCore para llevar a cabo esta tarea'
 };
