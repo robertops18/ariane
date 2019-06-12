@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Dimensions, Alert, View} from 'react-native';
+import {StyleSheet, Dimensions, Alert, View, BackHandler} from 'react-native';
 import {ViroARSceneNavigator} from "react-viro";
 import API from "../../providers/api";
 import {connect} from "react-redux";
@@ -28,6 +28,13 @@ export class ARScreen extends React.Component {
 
   componentWillMount(): void {
     Orientation.lockToPortrait();
+  }
+
+  componentDidMount(): void {
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.navigation.goBack(); // works best when the goBack is async
+      return true;
+    });
   }
 
   componentWillUnmount(): void {

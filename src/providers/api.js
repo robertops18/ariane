@@ -18,7 +18,6 @@ class Api {
         return query ? await query.json() : false;
 
     }
-
     
     async uploadAvatar(token, data){
         const query = await customfetch(`${BASE_API}/user/update-avatar`, {
@@ -32,7 +31,6 @@ class Api {
         console.log(query);
         return query ? await query.json() : false;
     };
-
 
     async registerToken(token, data){
         const query = await customfetch(`${BASE_API}/user/register-token`, {
@@ -111,7 +109,7 @@ class Api {
       }
     }
 
-  async getFieldTripMarkers(token) {
+    async getFieldTripMarkers(token) {
     const query = await customfetch(`${BASE_API}/field-activity/student/activities/markers`,{
       method: 'GET',
       headers: {
