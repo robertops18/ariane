@@ -26,6 +26,8 @@ export class Details extends React.Component {
       markers:[],
       firstLoad: true
     };
+
+    console.log(this.props.navigation.state.params.item);
   }
 
   componentWillMount(): void {
@@ -156,7 +158,9 @@ export class Details extends React.Component {
                   </Text>
                   <List
                     data={this.state.item.tasks}
-                    name={'tasks'}>
+                    name={'tasks'}
+                    demo={this.state.item.demo}
+                  >
                   </List>
                 </View>
               </View>

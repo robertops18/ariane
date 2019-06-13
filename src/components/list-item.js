@@ -16,7 +16,7 @@ class ListItem extends React.Component {
       if (this.props.name === 'field trips') {
         this.props.navigation.navigate('Details', {item: this.props.item});
       } else {
-        this.props.navigation.navigate('DetailsTasks', {item: this.props.item});
+        this.props.navigation.navigate('DetailsTasks', {item: this.props.item, demo: this.props.demo});
       }
 
     };

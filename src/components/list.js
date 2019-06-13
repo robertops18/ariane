@@ -23,6 +23,7 @@ class List extends React.Component {
                                 <ListItem
                                     item={item}
                                     name={this.props.name}
+                                    demo={this.props.demo}
                                 />
                             )
                         }}

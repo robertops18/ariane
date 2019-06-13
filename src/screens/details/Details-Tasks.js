@@ -35,6 +35,7 @@ export class DetailsTasks extends React.Component {
     super(props);
     this.state = {
       item : this.props.navigation.state.params.item,
+      isDemo: this.props.navigation.state.params.demo,
       starCount : 0,
       animating: false,
       alertMessage: '',
@@ -71,8 +72,8 @@ export class DetailsTasks extends React.Component {
         });
         this.setState({distanceToTask: distance});
         //TODO: Uncomment in order to activate to minimum distance to task
-/*
-        if (distance > 100) {
+
+        if (distance > 100 && !this.state.isDemo) {
           this.setState({taskCanBePerformed: false});
           let subtitle = translate('WARN_DISTANCE_SUBTITLE') + '\n' + translate('DISTANCE') + this.state.distanceToTask + ' m';
           if (this.state.item.type !== 'DESCRIPCIÓN') {
@@ -80,7 +81,7 @@ export class DetailsTasks extends React.Component {
               subtitle);
           }
         }
-*/
+
       },
       error => Alert.alert(error.message)
     );
