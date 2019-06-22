@@ -21,7 +21,7 @@ export class ARScreen extends React.Component {
     super(props);
     this.state = {
       sharedProps :{
-        apiKey:"4B297AD2-2DC8-4EA9-A89E-9BE6C1047B48",
+        apiKey:"C014DEED-22F8-4FF1-A11B-72936F40A4E4",
       },
     };
   }
@@ -81,6 +81,7 @@ export class ARScreen extends React.Component {
     return(
       <ViroARSceneNavigator
         {...this.state.sharedProps}
+        debug={true}
         initialScene={{scene: scene, passProps: {task: this.props.navigation.state.params.task}}}
       />
     )

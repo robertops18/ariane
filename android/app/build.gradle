@@ -198,7 +198,9 @@ dependencies {
     implementation project(':react-native-maps')
     implementation project(':react-native-webview')
     implementation project(':react-native-i18n')
-    implementation project(':react-native-device-info')
+    implementation (project(':react-native-device-info'), {
+      exclude group: "com.google.android.gms"
+    })
     implementation project(':react-native-image-picker')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-gesture-handler')
